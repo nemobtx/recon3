@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B087CA0C1A8F305A001851F7 /* file_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA0A1A8F305A001851F7 /* file_Interface.cpp */; };
+		B087CA141A8F3578001851F7 /* convert2pcd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA131A8F3578001851F7 /* convert2pcd.cpp */; };
+		B08D8BA61A8D867B00EEA048 /* libcolamd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08D8BA41A8D867B00EEA048 /* libcolamd.a */; };
+		B08D8BA71A8D867B00EEA048 /* libV3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08D8BA51A8D867B00EEA048 /* libV3D.a */; };
+		B0F325AB1A7E178D00C9E7C6 /* AbstractFeatureMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F3258D1A7E178D00C9E7C6 /* AbstractFeatureMatcher.cpp */; };
+		B0F325AC1A7E178D00C9E7C6 /* BundleAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F3258F1A7E178D00C9E7C6 /* BundleAdjuster.cpp */; };
+		B0F325AD1A7E178D00C9E7C6 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325911A7E178D00C9E7C6 /* Common.cpp */; };
+		B0F325AE1A7E178D00C9E7C6 /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325931A7E178D00C9E7C6 /* Distance.cpp */; };
+		B0F325AF1A7E178D00C9E7C6 /* FindCameraMatrices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325951A7E178D00C9E7C6 /* FindCameraMatrices.cpp */; };
+		B0F325B11A7E178D00C9E7C6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F3259B1A7E178D00C9E7C6 /* main.cpp */; };
+		B0F325B21A7E178D00C9E7C6 /* MultiCameraDistance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F3259C1A7E178D00C9E7C6 /* MultiCameraDistance.cpp */; };
+		B0F325B31A7E178D00C9E7C6 /* MultiCameraPnP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F3259E1A7E178D00C9E7C6 /* MultiCameraPnP.cpp */; };
+		B0F325B41A7E178D00C9E7C6 /* OFFeatureMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325A01A7E178D00C9E7C6 /* OFFeatureMatcher.cpp */; };
+		B0F325B51A7E178D00C9E7C6 /* RichFeatureMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325A31A7E178D00C9E7C6 /* RichFeatureMatcher.cpp */; };
+		B0F325B71A7E178D00C9E7C6 /* Triangulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0F325A71A7E178D00C9E7C6 /* Triangulation.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B087CA0F1A8F3578001851F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		B0F325811A7E174700C9E7C6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B087CA0A1A8F305A001851F7 /* file_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_Interface.cpp; sourceTree = "<group>"; };
+		B087CA0B1A8F305A001851F7 /* file_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_Interface.h; sourceTree = "<group>"; };
+		B087CA111A8F3578001851F7 /* convert2pcd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convert2pcd; sourceTree = BUILT_PRODUCTS_DIR; };
+		B087CA131A8F3578001851F7 /* convert2pcd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = convert2pcd.cpp; sourceTree = "<group>"; };
+		B087CA181A8F3B9E001851F7 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		B08D8BA41A8D867B00EEA048 /* libcolamd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcolamd.a; sourceTree = "<group>"; };
+		B08D8BA51A8D867B00EEA048 /* libV3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libV3D.a; sourceTree = "<group>"; };
+		B0F325831A7E174700C9E7C6 /* sfm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sfm; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0F3258D1A7E178D00C9E7C6 /* AbstractFeatureMatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractFeatureMatcher.cpp; sourceTree = "<group>"; };
+		B0F3258E1A7E178D00C9E7C6 /* AbstractFeatureMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractFeatureMatcher.h; sourceTree = "<group>"; };
+		B0F3258F1A7E178D00C9E7C6 /* BundleAdjuster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BundleAdjuster.cpp; sourceTree = "<group>"; };
+		B0F325901A7E178D00C9E7C6 /* BundleAdjuster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleAdjuster.h; sourceTree = "<group>"; };
+		B0F325911A7E178D00C9E7C6 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Common.cpp; sourceTree = "<group>"; };
+		B0F325921A7E178D00C9E7C6 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		B0F325931A7E178D00C9E7C6 /* Distance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Distance.cpp; sourceTree = "<group>"; };
+		B0F325941A7E178D00C9E7C6 /* Distance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = "<group>"; };
+		B0F325951A7E178D00C9E7C6 /* FindCameraMatrices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindCameraMatrices.cpp; sourceTree = "<group>"; };
+		B0F325961A7E178D00C9E7C6 /* FindCameraMatrices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCameraMatrices.h; sourceTree = "<group>"; };
+		B0F325991A7E178D00C9E7C6 /* IDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDistance.h; sourceTree = "<group>"; };
+		B0F3259A1A7E178D00C9E7C6 /* IFeatureMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFeatureMatcher.h; sourceTree = "<group>"; };
+		B0F3259B1A7E178D00C9E7C6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B0F3259C1A7E178D00C9E7C6 /* MultiCameraDistance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiCameraDistance.cpp; sourceTree = "<group>"; };
+		B0F3259D1A7E178D00C9E7C6 /* MultiCameraDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCameraDistance.h; sourceTree = "<group>"; };
+		B0F3259E1A7E178D00C9E7C6 /* MultiCameraPnP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiCameraPnP.cpp; sourceTree = "<group>"; };
+		B0F3259F1A7E178D00C9E7C6 /* MultiCameraPnP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCameraPnP.h; sourceTree = "<group>"; };
+		B0F325A01A7E178D00C9E7C6 /* OFFeatureMatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OFFeatureMatcher.cpp; sourceTree = "<group>"; };
+		B0F325A11A7E178D00C9E7C6 /* OFFeatureMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFFeatureMatcher.h; sourceTree = "<group>"; };
+		B0F325A21A7E178D00C9E7C6 /* pointcloud.ply */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pointcloud.ply; sourceTree = "<group>"; };
+		B0F325A31A7E178D00C9E7C6 /* RichFeatureMatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RichFeatureMatcher.cpp; sourceTree = "<group>"; };
+		B0F325A41A7E178D00C9E7C6 /* RichFeatureMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichFeatureMatcher.h; sourceTree = "<group>"; };
+		B0F325A71A7E178D00C9E7C6 /* Triangulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangulation.cpp; sourceTree = "<group>"; };
+		B0F325A81A7E178D00C9E7C6 /* Triangulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangulation.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B087CA0E1A8F3578001851F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0F325801A7E174700C9E7C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B08D8BA61A8D867B00EEA048 /* libcolamd.a in Frameworks */,
+				B08D8BA71A8D867B00EEA048 /* libV3D.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B087CA121A8F3578001851F7 /* convert2pcd */ = {
+			isa = PBXGroup;
+			children = (
+				B087CA131A8F3578001851F7 /* convert2pcd.cpp */,
+				B087CA181A8F3B9E001851F7 /* CMakeLists.txt */,
+			);
+			path = convert2pcd;
+			sourceTree = "<group>";
+		};
+		B0C400311A8879C000D372B2 /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = opencv;
+			path = sfm;
+			sourceTree = "<group>";
+		};
+		B0F3257A1A7E174700C9E7C6 = {
+			isa = PBXGroup;
+			children = (
+				B0F325851A7E174700C9E7C6 /* sfm */,
+				B087CA121A8F3578001851F7 /* convert2pcd */,
+				B0F325841A7E174700C9E7C6 /* Products */,
+				B0C400311A8879C000D372B2 /* opencv */,
+			);
+			sourceTree = "<group>";
+		};
+		B0F325841A7E174700C9E7C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B0F325831A7E174700C9E7C6 /* sfm */,
+				B087CA111A8F3578001851F7 /* convert2pcd */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0F325851A7E174700C9E7C6 /* sfm */ = {
+			isa = PBXGroup;
+			children = (
+				B08D8BA41A8D867B00EEA048 /* libcolamd.a */,
+				B08D8BA51A8D867B00EEA048 /* libV3D.a */,
+				B0F3259B1A7E178D00C9E7C6 /* main.cpp */,
+				B0F3258D1A7E178D00C9E7C6 /* AbstractFeatureMatcher.cpp */,
+				B0F3258F1A7E178D00C9E7C6 /* BundleAdjuster.cpp */,
+				B0F325911A7E178D00C9E7C6 /* Common.cpp */,
+				B0F325931A7E178D00C9E7C6 /* Distance.cpp */,
+				B0F325951A7E178D00C9E7C6 /* FindCameraMatrices.cpp */,
+				B0F3259C1A7E178D00C9E7C6 /* MultiCameraDistance.cpp */,
+				B0F3259E1A7E178D00C9E7C6 /* MultiCameraPnP.cpp */,
+				B0F325A01A7E178D00C9E7C6 /* OFFeatureMatcher.cpp */,
+				B0F325A31A7E178D00C9E7C6 /* RichFeatureMatcher.cpp */,
+				B0F325A71A7E178D00C9E7C6 /* Triangulation.cpp */,
+				B0F3258E1A7E178D00C9E7C6 /* AbstractFeatureMatcher.h */,
+				B0F325901A7E178D00C9E7C6 /* BundleAdjuster.h */,
+				B0F325921A7E178D00C9E7C6 /* Common.h */,
+				B0F325941A7E178D00C9E7C6 /* Distance.h */,
+				B0F325961A7E178D00C9E7C6 /* FindCameraMatrices.h */,
+				B0F325991A7E178D00C9E7C6 /* IDistance.h */,
+				B0F3259A1A7E178D00C9E7C6 /* IFeatureMatcher.h */,
+				B0F3259D1A7E178D00C9E7C6 /* MultiCameraDistance.h */,
+				B0F3259F1A7E178D00C9E7C6 /* MultiCameraPnP.h */,
+				B0F325A11A7E178D00C9E7C6 /* OFFeatureMatcher.h */,
+				B0F325A41A7E178D00C9E7C6 /* RichFeatureMatcher.h */,
+				B0F325A81A7E178D00C9E7C6 /* Triangulation.h */,
+				B0F325A21A7E178D00C9E7C6 /* pointcloud.ply */,
+				B087CA0A1A8F305A001851F7 /* file_Interface.cpp */,
+				B087CA0B1A8F305A001851F7 /* file_Interface.h */,
+			);
+			path = sfm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B087CA101A8F3578001851F7 /* convert2pcd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B087CA151A8F3578001851F7 /* Build configuration list for PBXNativeTarget "convert2pcd" */;
+			buildPhases = (
+				B087CA0D1A8F3578001851F7 /* Sources */,
+				B087CA0E1A8F3578001851F7 /* Frameworks */,
+				B087CA0F1A8F3578001851F7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = convert2pcd;
+			productName = convert2pcd;
+			productReference = B087CA111A8F3578001851F7 /* convert2pcd */;
+			productType = "com.apple.product-type.tool";
+		};
+		B0F325821A7E174700C9E7C6 /* sfm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0F3258A1A7E174700C9E7C6 /* Build configuration list for PBXNativeTarget "sfm" */;
+			buildPhases = (
+				B0F3257F1A7E174700C9E7C6 /* Sources */,
+				B0F325801A7E174700C9E7C6 /* Frameworks */,
+				B0F325811A7E174700C9E7C6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sfm;
+			productName = sfm;
+			productReference = B0F325831A7E174700C9E7C6 /* sfm */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0F3257B1A7E174700C9E7C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Yongduek Seo";
+				TargetAttributes = {
+					B087CA101A8F3578001851F7 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					B0F325821A7E174700C9E7C6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = B0F3257E1A7E174700C9E7C6 /* Build configuration list for PBXProject "sfm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B0F3257A1A7E174700C9E7C6;
+			productRefGroup = B0F325841A7E174700C9E7C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B0F325821A7E174700C9E7C6 /* sfm */,
+				B087CA101A8F3578001851F7 /* convert2pcd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B087CA0D1A8F3578001851F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B087CA141A8F3578001851F7 /* convert2pcd.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0F3257F1A7E174700C9E7C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0F325B41A7E178D00C9E7C6 /* OFFeatureMatcher.cpp in Sources */,
+				B0F325B51A7E178D00C9E7C6 /* RichFeatureMatcher.cpp in Sources */,
+				B0F325AE1A7E178D00C9E7C6 /* Distance.cpp in Sources */,
+				B0F325AB1A7E178D00C9E7C6 /* AbstractFeatureMatcher.cpp in Sources */,
+				B0F325AF1A7E178D00C9E7C6 /* FindCameraMatrices.cpp in Sources */,
+				B0F325B71A7E178D00C9E7C6 /* Triangulation.cpp in Sources */,
+				B0F325B11A7E178D00C9E7C6 /* main.cpp in Sources */,
+				B0F325B31A7E178D00C9E7C6 /* MultiCameraPnP.cpp in Sources */,
+				B0F325AC1A7E178D00C9E7C6 /* BundleAdjuster.cpp in Sources */,
+				B087CA0C1A8F305A001851F7 /* file_Interface.cpp in Sources */,
+				B0F325AD1A7E178D00C9E7C6 /* Common.cpp in Sources */,
+				B0F325B21A7E178D00C9E7C6 /* MultiCameraDistance.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B087CA161A8F3578001851F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B087CA171A8F3578001851F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B0F325881A7E174700C9E7C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B0F325891A7E174700C9E7C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B0F3258B1A7E174700C9E7C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+					"/usr/local/include/pcl-1.6",
+					/usr/local/include/eigen3,
+					"/Users/yndk/Dropbox/Mastering_OpenCV/SSBA-3.0",
+					"/usr/local/include/vtk-6.1",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/Users/yndk/Dropbox/Mastering_OpenCV/SSBA-3.0/build",
+					"$(PROJECT_DIR)/sfm",
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_core",
+					"-lopencv_nonfree",
+					"-lopencv_highgui",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_video",
+					"-lopencv_imgproc",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B0F3258C1A7E174700C9E7C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+					"/usr/local/include/pcl-1.6",
+					/usr/local/include/eigen3,
+					"/Users/yndk/Dropbox/Mastering_OpenCV/SSBA-3.0",
+					"/usr/local/include/vtk-6.1",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/Users/yndk/Dropbox/Mastering_OpenCV/SSBA-3.0/build",
+					"$(PROJECT_DIR)/sfm",
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_core",
+					"-lopencv_nonfree",
+					"-lopencv_highgui",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_video",
+					"-lopencv_imgproc",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B087CA151A8F3578001851F7 /* Build configuration list for PBXNativeTarget "convert2pcd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B087CA161A8F3578001851F7 /* Debug */,
+				B087CA171A8F3578001851F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B0F3257E1A7E174700C9E7C6 /* Build configuration list for PBXProject "sfm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0F325881A7E174700C9E7C6 /* Debug */,
+				B0F325891A7E174700C9E7C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0F3258A1A7E174700C9E7C6 /* Build configuration list for PBXNativeTarget "sfm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0F3258B1A7E174700C9E7C6 /* Debug */,
+				B0F3258C1A7E174700C9E7C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0F3257B1A7E174700C9E7C6 /* Project object */;
+}

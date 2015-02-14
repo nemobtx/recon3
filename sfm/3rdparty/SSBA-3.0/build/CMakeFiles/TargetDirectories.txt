@@ -1,0 +1,5 @@
+/Users/yndk/Dropbox/recon3/sfm/3rdparty/SSBA-3.0/build/Apps/CMakeFiles/bundle_varying.dir
+/Users/yndk/Dropbox/recon3/sfm/3rdparty/SSBA-3.0/build/Apps/CMakeFiles/bundle_varying_nonlinlsq.dir
+/Users/yndk/Dropbox/recon3/sfm/3rdparty/SSBA-3.0/build/CMakeFiles/colamd.dir
+/Users/yndk/Dropbox/recon3/sfm/3rdparty/SSBA-3.0/build/CMakeFiles/V3D.dir
+/Users/yndk/Dropbox/recon3/sfm/3rdparty/SSBA-3.0/build/Apps/CMakeFiles/bundle_common.dir
