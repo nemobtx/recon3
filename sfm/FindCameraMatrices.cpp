@@ -148,7 +148,15 @@ Mat GetFundamentalMat(const vector<KeyPoint>& imgpts1,
 #endif
     double minVal,maxVal;
     cv::minMaxIdx(pts1,&minVal,&maxVal); // Finds the global minimum and maximum in an array
-    F = findFundamentalMat(pts1, pts2, FM_RANSAC, 0.006 * maxVal /*max epi-distance*/, 0.99, status); //threshold from [Snavely07 4.1]: 0.6% of the maximum image dimension
+    F = findFundamentalMat(pts1, pts2,
+                           FM_RANSAC,
+#ifdef MY_FMATRIX_TH
+                           MY_FMATRIX_TH /*max epi-distance*/,
+#else
+                           0.006 * maxVal /*max epi-distance*/,
+#endif
+                           0.99,
+                           status);
 	}
 	
 	vector<DMatch> new_matches;

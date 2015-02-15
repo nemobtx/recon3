@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>pcdViewer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>sfm.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>B087CA101A8F3578001851F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B087CA1C1A903E98001851F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

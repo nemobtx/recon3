@@ -67,10 +67,10 @@ public:
                          0,1,0,0,
                          0,0,1,0);
         
-        const string ymlfile = "./out_camera_data.yml";
-        cerr << "-----------------------------------------" << endl;
-        cerr << "  class Distance(): reading: " << ymlfile << endl;
-        cerr << "-----------------------------------------" << endl;
+        const std::string ymlfile = "./out_camera_data.yml";
+        std::cerr << "-----------------------------------------" << std::endl;
+        std::cerr << "  class Distance(): reading: " << ymlfile << std::endl;
+        std::cerr << "-----------------------------------------" << std::endl;
         
         cv::FileStorage fs;
         fs.open(ymlfile,cv::FileStorage::READ);

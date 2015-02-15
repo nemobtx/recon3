@@ -31,7 +31,13 @@ int MultiCameraPnP::FindHomographyInliers2Views(int vi, int vj)
     cv::minMaxIdx(ipts,&minVal,&maxVal); //TODO flatten point2d?? or it takes max of width and height
     
     vector<uchar> status;
-    cv::Mat H = cv::findHomography(ipts,jpts,status,CV_RANSAC, 0.004 * maxVal); //threshold from Snavely07
+    cv::Mat H = cv::findHomography(ipts,jpts,status,CV_RANSAC,
+#ifdef MY_HOMOGRPY_TH
+                                   MY_HOMOGRPY_TH
+#else
+                                   0.004 * maxVal
+#endif
+                                   ); //threshold from Snavely07
     return cv::countNonZero(status); //number of inliers
 }
 
@@ -207,26 +213,27 @@ bool MultiCameraPnP::FindPoseEstimation(
     }
     
     vector<int> inliers;
-    if(!use_gpu) {
-        //use CPU
-        double minVal,maxVal; cv::minMaxIdx(imgPoints,&minVal,&maxVal);
-        CV_PROFILE("solvePnPRansac",cv::solvePnPRansac(ppcloud, imgPoints, K, distortion_coeff, rvec, t, true, 1000, 0.006 * maxVal, 0.25 * (double)(imgPoints.size()), inliers, CV_EPNP);)
-        //CV_PROFILE("solvePnP",cv::solvePnP(ppcloud, imgPoints, K, distortion_coeff, rvec, t, true, CV_EPNP);)
-    } else {
-        //use GPU ransac
-        //make sure datatstructures are cv::gpu compatible
-/**
-        cv::Mat ppcloud_m(ppcloud); ppcloud_m = ppcloud_m.t();
-        cv::Mat imgPoints_m(imgPoints); imgPoints_m = imgPoints_m.t();
-        cv::Mat rvec_,t_;
-        
-        cv::gpu::solvePnPRansac(ppcloud_m,imgPoints_m,K_32f,distcoeff_32f,rvec_,t_,false);
-        
-        rvec_.convertTo(rvec,CV_64FC1);
-        t_.convertTo(t,CV_64FC1);
-**/
-cerr << "MultiCameraPnP::FindPoseEstimation(): GPU disabled!" << endl;
-exit (0);
+    //use CPU
+    double minVal,maxVal; cv::minMaxIdx(imgPoints,&minVal,&maxVal);
+    
+    //
+    // CV_PROFILE() is defined in Common.h
+    // for the purpose of checking the execution time (profiling)
+    //
+    CV_PROFILE("solvePnPRansac",
+               cv::solvePnPRansac(ppcloud, imgPoints, K, distortion_coeff, rvec, t,
+                                  true, 1000,
+#ifdef MY_FMATRIX_TH
+                                  MY_FMATRIX_TH,
+#else
+                                  0.006 * maxVal,
+#endif
+                                  0.25 * (double)(imgPoints.size()), inliers, CV_EPNP);
+               )
+
+    if (use_gpu) {
+        cerr << "MultiCameraPnP::FindPoseEstimation(): GPU disabled!" << endl;
+        exit (0);
     }
     
     vector<cv::Point2f> projected3D;
