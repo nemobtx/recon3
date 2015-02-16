@@ -25,7 +25,7 @@ class MultiCameraDistance  : public IDistance {
 protected:
     std::vector<std::vector<cv::KeyPoint> > imgpts;
     std::vector<std::vector<cv::KeyPoint> > fullpts;
-    std::vector<std::vector<cv::KeyPoint> > imgpts_good;
+    //std::vector<std::vector<cv::KeyPoint> > imgpts_good;
     
     std::map<std::pair<int,int> ,std::vector<cv::DMatch> > matches_matrix;
     
@@ -51,19 +51,22 @@ protected:
     bool features_matched;
 public:
     bool use_rich_features;
-    bool use_gpu;
+    //bool use_gpu;
     
     std::vector<cv::Point3d> getPointCloud() { return CloudPointsToPoints(pcloud); }
     
     const cv::Mat& get_im_orig(int frame_num) { return imgs_orig[frame_num]; }
     
-    const std::vector<cv::KeyPoint>& getcorrespImg1Pt()
-    { return correspImg1Pt; }
+    const std::vector<cv::KeyPoint>& getcorrespImg1Pt() { return correspImg1Pt; }
     
-    const std::vector<cv::Vec3b>& getPointCloudRGB()
-    {
-        if(pointCloudRGB.size()==0) { GetRGBForPointCloud(pcloud,pointCloudRGB); } return pointCloudRGB;
+    
+    const std::vector<cv::Vec3b>& getPointCloudRGB() {
+        if(pointCloudRGB.size()==0) {
+            GetRGBForPointCloud(pcloud,pointCloudRGB);
+        }
+        return pointCloudRGB;
     }
+    
     
     std::vector<cv::Matx34d> getCameras()
     {
@@ -74,8 +77,10 @@ public:
         return v;
     }
     
+    void GetFeatureMapForPointCloud(const std::vector<CloudPoint>& pcloud);
+
     void GetRGBForPointCloud(
-                             const std::vector<struct CloudPoint>& pcloud,
+                             const std::vector<CloudPoint>& pcloud,
                              std::vector<cv::Vec3b>& RGBforCloud
                              );
     

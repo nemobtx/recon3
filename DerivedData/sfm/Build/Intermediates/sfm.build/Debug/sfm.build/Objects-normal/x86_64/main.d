@@ -35,5 +35,4 @@ dependencies: /Users/yndk/Dropbox/recon3/sfm/main.cpp \
   /Users/yndk/Dropbox/recon3/sfm/IFeatureMatcher.h \
   /Users/yndk/Dropbox/recon3/sfm/MultiCameraPnP.h \
   /Users/yndk/Dropbox/recon3/sfm/MultiCameraDistance.h \
-  /Users/yndk/Dropbox/recon3/sfm/SfMUpdateListener.h \
   /Users/yndk/Dropbox/recon3/sfm/file_Interface.h

@@ -31,7 +31,9 @@ std::vector<cv::DMatch> FlipMatches(const std::vector<cv::DMatch>& matches) {
     return flip;
 }
 
-std::vector<cv::Point3d> CloudPointsToPoints(const std::vector<CloudPoint> cpts) {
+std::vector<cv::Point3d>
+CloudPointsToPoints(const std::vector<CloudPoint> cpts)
+{
     std::vector<cv::Point3d> out;
     for (unsigned int i=0; i<cpts.size(); i++) {
         out.push_back(cpts[i].pt);
@@ -75,38 +77,38 @@ void drawArrows(Mat& frame, const vector<Point2f>& prevPts, const vector<Point2f
         {
         if (status[i])
             {
-                double alpha = intrpmnmx(verror[i],minVal,maxVal); alpha = 1.0 - alpha;
-                Scalar line_color(alpha*_line_color[0],
-                                  alpha*_line_color[1],
-                                  alpha*_line_color[2]);
+            double alpha = intrpmnmx(verror[i],minVal,maxVal); alpha = 1.0 - alpha;
+            Scalar line_color(alpha*_line_color[0],
+                              alpha*_line_color[1],
+                              alpha*_line_color[2]);
             
-                Point p = prevPts[i];
-                Point q = nextPts[i];
+            Point p = prevPts[i];
+            Point q = nextPts[i];
             
-                double angle = atan2((double) p.y - q.y, (double) p.x - q.x);
+            double angle = atan2((double) p.y - q.y, (double) p.x - q.x);
             
-                double hypotenuse = sqrt( (double)(p.y - q.y)*(p.y - q.y) + (double)(p.x - q.x)*(p.x - q.x) );
+            double hypotenuse = sqrt( (double)(p.y - q.y)*(p.y - q.y) + (double)(p.x - q.x)*(p.x - q.x) );
             
-                if (hypotenuse < 1.0)
-                    continue;
+            if (hypotenuse < 1.0)
+                continue;
             
-                // Here we lengthen the arrow by a factor of three.
-                q.x = (int) (p.x - 3 * hypotenuse * cos(angle));
-                q.y = (int) (p.y - 3 * hypotenuse * sin(angle));
+            // Here we lengthen the arrow by a factor of three.
+            q.x = (int) (p.x - 3 * hypotenuse * cos(angle));
+            q.y = (int) (p.y - 3 * hypotenuse * sin(angle));
             
-                // Now we draw the main line of the arrow.
-                line(frame, p, q, line_color, line_thickness);
+            // Now we draw the main line of the arrow.
+            line(frame, p, q, line_color, line_thickness);
             
-                // Now draw the tips of the arrow. I do some scaling so that the
-                // tips look proportional to the main line of the arrow.
+            // Now draw the tips of the arrow. I do some scaling so that the
+            // tips look proportional to the main line of the arrow.
             
-                p.x = (int) (q.x + 9 * cos(angle + CV_PI / 4));
-                p.y = (int) (q.y + 9 * sin(angle + CV_PI / 4));
-                line(frame, p, q, line_color, line_thickness);
+            p.x = (int) (q.x + 9 * cos(angle + CV_PI / 4));
+            p.y = (int) (q.y + 9 * sin(angle + CV_PI / 4));
+            line(frame, p, q, line_color, line_thickness);
             
-                p.x = (int) (q.x + 9 * cos(angle - CV_PI / 4));
-                p.y = (int) (q.y + 9 * sin(angle - CV_PI / 4));
-                line(frame, p, q, line_color, line_thickness);
+            p.x = (int) (q.x + 9 * cos(angle - CV_PI / 4));
+            p.y = (int) (q.y + 9 * sin(angle - CV_PI / 4));
+            line(frame, p, q, line_color, line_thickness);
             }
         }
 }
@@ -144,8 +146,7 @@ void open_imgs_dir(const char* dir_name,
     string dir_name_ = string(dir_name);
     vector<string> files_;
     
-#ifndef WIN32
-    //open a directory the POSIX way
+#ifndef WIN32 //open a directory the POSIX way
     
     DIR *dp;
     struct dirent *ep;
@@ -165,7 +166,8 @@ void open_imgs_dir(const char* dir_name,
         return;
     }
     
-#else
+#else // Windows, not tested
+    {
     //open a directory the WIN32 way
     HANDLE hFind = INVALID_HANDLE_VALUE;
     WIN32_FIND_DATA fdata;
@@ -207,16 +209,19 @@ void open_imgs_dir(const char* dir_name,
     
     FindClose(hFind);
     hFind = INVALID_HANDLE_VALUE;
+    }
 #endif
     
+    // read all the images
+    //
     for (unsigned int i=0; i<files_.size(); i++) {
         if (files_[i][0] == '.' ||
             !(hasEndingLower(files_[i],"jpg")||hasEndingLower(files_[i],"png")))
             {
             continue;
             }
-	string imgfilename = string(dir_name_).append("/").append(files_[i]);
-	cerr << "trying to read: " << imgfilename << endl;
+        string imgfilename = string(dir_name_).append("/").append(files_[i]);
+        cerr << "trying to read: " << imgfilename << endl;
         cv::Mat m_ = cv::imread(imgfilename);
         if(downscale_factor != 1.0)
             cv::resize(m_,m_,Size(),downscale_factor,downscale_factor);
@@ -225,5 +230,5 @@ void open_imgs_dir(const char* dir_name,
         cerr << "Image read: " << files_[i] << " of size " << images[i].cols << "x" << images[i].rows << endl;
     }
     
-    
+    return;
 }

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sfm/main.cpp"
-            timestampString = "445662566.405788"
+            timestampString = "445746784.952828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "main(int argc, char** argv)"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,14 +25,86 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sfm/main.cpp"
-            timestampString = "445662566.405788"
+            filePath = "sfm/Common.cpp"
+            timestampString = "445746434.572607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "main(int argc, char** argv)"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "open_imgs_dir(const char* dir_name, std::vector&lt;cv::Mat&gt;&amp; images, std::vector&lt;std::string&gt;&amp; images_names, double downscale_factor)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open_imgs_dir(char const*, std::__1::vector&lt;cv::Mat, std::__1::allocator&lt;cv::Mat&gt; &gt;&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, double)"
+                  moduleName = "sfm"
+                  urlString = "file:///Users/yndk/Dropbox/recon3/sfm/Common.cpp"
+                  timestampString = "445785797.093504"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "1403">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open_imgs_dir(char const*, std::__1::vector&lt;cv::Mat, std::__1::allocator&lt;cv::Mat&gt; &gt;&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, double)"
+                  moduleName = "sfm"
+                  urlString = "file:///Users/yndk/Dropbox/recon3/sfm/Common.cpp"
+                  timestampString = "445785797.093784"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "1430">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open_imgs_dir(char const*, std::__1::vector&lt;cv::Mat, std::__1::allocator&lt;cv::Mat&gt; &gt;&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, double)"
+                  moduleName = "sfm"
+                  urlString = "file:///Users/yndk/Dropbox/recon3/sfm/Common.cpp"
+                  timestampString = "445785797.094039"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "2715">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open_imgs_dir(char const*, std::__1::vector&lt;cv::Mat, std::__1::allocator&lt;cv::Mat&gt; &gt;&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, double)"
+                  moduleName = "sfm"
+                  urlString = "file:///Users/yndk/Dropbox/recon3/sfm/Common.cpp"
+                  timestampString = "445785797.094249"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "3901">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open_imgs_dir(char const*, std::__1::vector&lt;cv::Mat, std::__1::allocator&lt;cv::Mat&gt; &gt;&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, double)"
+                  moduleName = "sfm"
+                  urlString = "file:///Users/yndk/Dropbox/recon3/sfm/Common.cpp"
+                  timestampString = "445785797.094513"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "3968">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,28 +114,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sfm/MultiCameraPnP.cpp"
-            timestampString = "445483977.485733"
+            timestampString = "445785796.75766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
-            landmarkName = "MultiCameraPnP::PruneMatchesBasedOnF()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sfm/MultiCameraPnP.cpp"
-            timestampString = "445485211.533744"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "MultiCameraPnP::GetBaseLineTriangulation()"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
+            landmarkName = "MultiCameraPnP::RecoverDepthFromImages()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
