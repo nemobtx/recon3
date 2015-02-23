@@ -12,6 +12,13 @@
 #include "BundleAdjuster.h"
 #include "Common.h"
 
+#ifndef __USE_SSBA__
+#include <opencv2/contrib/contrib.hpp>
+#endif
+
+using namespace std;
+using namespace cv; 
+
 #ifdef __USE_SSBA__
 #define V3DLIB_ENABLE_SUITESPARSE
 
@@ -20,8 +27,6 @@
 #include <Geometry/v3d_metricbundle.h>
 
 using namespace V3D;
-using namespace std;
-using namespace cv; 
 
 namespace
 {
