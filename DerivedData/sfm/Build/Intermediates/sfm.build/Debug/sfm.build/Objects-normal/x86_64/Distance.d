@@ -1,4 +1,4 @@
-dependencies: /Users/yndk/Dropbox/recon3/sfm/Distance.cpp \
+dependencies: /Users/yndk/Documents/Projects/recon3/sfm/Distance.cpp \
   /usr/local/include/opencv2/core/core.hpp \
   /usr/local/include/opencv2/core/types_c.h \
   /usr/local/include/opencv2/core/version.hpp \
@@ -15,7 +15,7 @@ dependencies: /Users/yndk/Dropbox/recon3/sfm/Distance.cpp \
   /usr/local/include/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv2/calib3d/calib3d.hpp \
   /usr/local/include/opencv2/video/tracking.hpp \
-  /Users/yndk/Dropbox/recon3/sfm/Distance.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/Distance.h \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/imgproc/imgproc_c.h \
   /usr/local/include/opencv2/photo/photo.hpp \
@@ -27,9 +27,9 @@ dependencies: /Users/yndk/Dropbox/recon3/sfm/Distance.cpp \
   /usr/local/include/opencv2/contrib/contrib.hpp \
   /usr/local/include/opencv2/contrib/retina.hpp \
   /usr/local/include/opencv2/contrib/openfabmap.hpp \
-  /Users/yndk/Dropbox/recon3/sfm/Common.h \
-  /Users/yndk/Dropbox/recon3/sfm/IDistance.h \
-  /Users/yndk/Dropbox/recon3/sfm/Triangulation.h \
-  /Users/yndk/Dropbox/recon3/sfm/FindCameraMatrices.h \
-  /Users/yndk/Dropbox/recon3/sfm/RichFeatureMatcher.h \
-  /Users/yndk/Dropbox/recon3/sfm/IFeatureMatcher.h
+  /Users/yndk/Documents/Projects/recon3/sfm/Common.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/IDistance.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/Triangulation.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/FindCameraMatrices.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/RichFeatureMatcher.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/IFeatureMatcher.h

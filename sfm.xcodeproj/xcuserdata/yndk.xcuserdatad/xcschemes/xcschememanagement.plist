@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>X.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>convert2pcd.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>B087CA1C1A903E98001851F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B0EC84911A9B4D560074DA13</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -12,6 +12,7 @@
 #include "BundleAdjuster.h"
 #include "Common.h"
 
+#ifdef __USE_SSBA__
 #define V3DLIB_ENABLE_SUITESPARSE
 
 #include <Math/v3d_linear.h>
@@ -59,6 +60,7 @@ namespace
 		cout << "mean reprojection error (in pixels): " << meanReprojectionError/K << endl;
 	}
 } // end namespace <>
+#endif
 
 //count number of 2D measurements
 int BundleAdjuster::Count2DMeasurements(const vector<CloudPoint>& pointcloud) {
@@ -82,9 +84,11 @@ void BundleAdjuster::adjustBundle(vector<CloudPoint>& pointcloud,
 	int N = Pmats.size(), M = pointcloud.size(), K = Count2DMeasurements(pointcloud);
 	
 	cout << "N (cams) = " << N << " M (points) = " << M << " K (measurements) = " << K << endl;
-	
+
+#ifdef __USE_SSBA__
+    
 	StdDistortionFunction distortion;
-	
+
 	//conver camera intrinsics to BA datastructs
 	Matrix3x3d KMat;
 	makeIdentityMatrix(KMat);
@@ -263,4 +267,107 @@ void BundleAdjuster::adjustBundle(vector<CloudPoint>& pointcloud,
 		cam_matrix.at<double>(1,1) = Knew[1][1];
 		cam_matrix.at<double>(1,2) = Knew[1][2];
 	}
+#else
+    //
+    // OpenCV contrib module is used for sparse bundle adjustment //
+    //
+    
+    cerr << "! Bundle Adjustment by OpenCV: Contrib Module" << endl;
+    
+    vector<Point3d> points(M);              // positions of points in global coordinate system (input and output)
+    vector<vector<Point2d> > imagePoints(N,vector<Point2d>(M)); // projections of 3d points for every camera
+    vector<vector<int> > visibility(N,vector<int>(M)); // visibility of 3d points for every camera
+    vector<Mat> cameraMatrix(N);    // intrinsic matrices of all cameras (input and output)
+    vector<Mat> R(N);                               // rotation matrices of all cameras (input and output)
+    vector<Mat> T(N);                               // translation vector of all cameras (input and output)
+    vector<Mat> distCoeffs(0);              // distortion coefficients of all cameras (input and output)
+    
+    int num_global_cams = pointcloud[0].imgpt_for_img.size();
+    vector<int> global_cam_id_to_local_id(num_global_cams,-1);
+    vector<int> local_cam_id_to_global_id(N,-1);
+    int local_cam_count = 0;
+    
+    for (int pt3d = 0; pt3d < pointcloud.size(); pt3d++) {
+        points[pt3d] = pointcloud[pt3d].pt;
+        //              imagePoints[pt3d].resize(N);
+        //              visibility[pt3d].resize(N);
+        
+        for (int pt3d_img = 0; pt3d_img < num_global_cams; pt3d_img++) {
+            if (pointcloud[pt3d].imgpt_for_img[pt3d_img] >= 0) {
+                if (global_cam_id_to_local_id[pt3d_img] < 0)
+                    {
+                    local_cam_id_to_global_id[local_cam_count] = pt3d_img;
+                    global_cam_id_to_local_id[pt3d_img] = local_cam_count++;
+                    }
+                
+                int local_cam_id = global_cam_id_to_local_id[pt3d_img];
+                
+                //2d point
+                Point2d pt2d_for_pt3d_in_img = imgpts[pt3d_img][pointcloud[pt3d].imgpt_for_img[pt3d_img]].pt;
+                imagePoints[local_cam_id][pt3d] = pt2d_for_pt3d_in_img;
+                
+                //visibility in this camera
+                visibility[local_cam_id][pt3d] = 1;
+            }
+        }
+        //2nd pass to mark not-founds
+        for (int pt3d_img = 0; pt3d_img < num_global_cams; pt3d_img++) {
+            if (pointcloud[pt3d].imgpt_for_img[pt3d_img] < 0) {
+                //see if this global camera is being used locally in the BA
+                vector<int>::iterator local_it = std::find(local_cam_id_to_global_id.begin(),local_cam_id_to_global_id.end(),pt3d_img);
+                if (local_it != local_cam_id_to_global_id.end()) {
+                    //this camera is used, and its local id is:
+                    int local_id = local_it - local_cam_id_to_global_id.begin();
+
+                    if (local_id >= 0) {
+                        //reproject
+                        Mat_<double> X = (Mat_<double>(4,1) << pointcloud[pt3d].pt.x, pointcloud[pt3d].pt.y, pointcloud[pt3d].pt.z, 1);
+                        Mat_<double> P(3,4,Pmats[pt3d_img].val);
+                        Mat_<double> KP = cam_matrix * P;
+                        Mat_<double> xPt_img = KP * X;
+                        Point2d xPt_img_(xPt_img(0)/xPt_img(2),xPt_img(1)/xPt_img(2));
+                        
+                        imagePoints[local_id][pt3d] = xPt_img_; //TODO reproject point on this camera
+                        visibility[local_id][pt3d] = 0;
+                    }
+                }
+            }
+        }
+    }
+    for (int i=0; i<N; i++) {
+        cameraMatrix[i] = cam_matrix;
+        
+        Matx34d& P = Pmats[local_cam_id_to_global_id[i]];
+        
+        Mat_<double> camR(3,3),camT(3,1);
+        camR(0,0) = P(0,0); camR(0,1) = P(0,1); camR(0,2) = P(0,2); camT(0) = P(0,3);
+        camR(1,0) = P(1,0); camR(1,1) = P(1,1); camR(1,2) = P(1,2); camT(1) = P(1,3);
+        camR(2,0) = P(2,0); camR(2,1) = P(2,1); camR(2,2) = P(2,2); camT(2) = P(2,3);
+        R[i] = camR;
+        T[i] = camT;
+        
+        //              distCoeffs[i] = Mat(); //::zeros(4,1, CV_64FC1);
+    }
+    
+    cout << "Adjust bundle... \n";
+    cv::LevMarqSparse::bundleAdjust(points,imagePoints,visibility,cameraMatrix,R,T,distCoeffs);
+    cout << "DONE\n";
+    
+    //get the BAed points
+    for (int pt3d = 0; pt3d < pointcloud.size(); pt3d++) {
+        pointcloud[pt3d].pt = points[pt3d];
+    }
+
+    //get the BAed cameras
+    for (int i = 0; i < N; ++i)
+        {
+        Matx34d P;
+        P(0,0) = R[i].at<double>(0,0); P(0,1) = R[i].at<double>(0,1); P(0,2) = R[i].at<double>(0,2); P(0,3) = T[i].at<double>(0);
+        P(1,0) = R[i].at<double>(1,0); P(1,1) = R[i].at<double>(1,1); P(1,2) = R[i].at<double>(1,2); P(1,3) = T[i].at<double>(1);
+        P(2,0) = R[i].at<double>(2,0); P(2,1) = R[i].at<double>(2,1); P(2,2) = R[i].at<double>(2,2); P(2,3) = T[i].at<double>(2);
+        
+        Pmats[local_cam_id_to_global_id[i]] = P;
+        }
+
+#endif
 }
