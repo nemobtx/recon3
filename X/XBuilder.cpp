@@ -79,9 +79,39 @@ void XBuilder::open_imgs_dir(string dir_name)
         cerr << "can't get image files" << endl;
         exit (1);
     }
-    cerr << "images loaded: " << endl;
-    for (int i=0; i<image_names.size(); i++)
-        cerr << i << ": " << image_names[i] << endl;
+    for (int i=0; i<image_names.size(); i++) {
+        cerr << i << ": " << image_names[i] << endl;        
+    }
+
+    //
+    //load calibration matrix
+    //
+    
+    cv::FileStorage fs;
+    std::string calibFile = dir_name + "/out_camera_data.yml";
+    
+    cerr << "  reading camera calibration data from <" << calibFile << ">" << endl;
+    
+    cv::Mat cam_matrix, distortion_coeff;
+    if(fs.open(calibFile,cv::FileStorage::READ)) {
+        fs["camera_matrix"]>>cam_matrix;
+        fs["distortion_coefficients"]>>distortion_coeff;
+    } else {
+        std::cerr << "! calibration file does not exist. Using temporay values" << std::endl;
+        //no calibration matrix file - mockup calibration
+        cv::Size imgs_size = images[0].size();
+        //double max_w_h = MAX(imgs_size.height,imgs_size.width);
+        cam_matrix = (cv::Mat_<double>(3,3) <<	800. ,	0	,		imgs_size.width/2.0,
+                      0,		800.,	imgs_size.height/2.0,
+                      0,			0,			1);
+        distortion_coeff = cv::Mat_<double>::zeros(1,4);
+    }
+    
+    K = cam_matrix;
+    cv::invert(K, Kinv); //get inverse of camera matrix
+    
+    std::cerr << "K=" << K << endl;
+    std::cerr << "distortion_coeff= " << distortion_coeff << endl;
 
     return;
 }

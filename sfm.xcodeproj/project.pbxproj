@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */; };
 		B087CA0C1A8F305A001851F7 /* file_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA0A1A8F305A001851F7 /* file_Interface.cpp */; };
 		B087CA141A8F3578001851F7 /* convert2pcd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA131A8F3578001851F7 /* convert2pcd.cpp */; };
 		B087CA261A903ED3001851F7 /* pcdViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA251A903ED3001851F7 /* pcdViewer.cpp */; };
@@ -641,6 +642,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmatrix_matching.cpp; sourceTree = "<group>"; };
 		B087CA0A1A8F305A001851F7 /* file_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_Interface.cpp; sourceTree = "<group>"; };
 		B087CA0B1A8F305A001851F7 /* file_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_Interface.h; sourceTree = "<group>"; };
 		B087CA111A8F3578001851F7 /* convert2pcd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convert2pcd; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2470,6 +2472,7 @@
 				B0EC84941A9B4D560074DA13 /* main.cpp */,
 				B0EC84991A9B4E7A0074DA13 /* XBuilder.cpp */,
 				B0EC849C1A9B529E0074DA13 /* sfm.cpp */,
+				B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */,
 				B0EC849A1A9B4E7A0074DA13 /* XBuilder.h */,
 			);
 			path = X;
@@ -2673,6 +2676,7 @@
 			files = (
 				B0EC849D1A9B529E0074DA13 /* sfm.cpp in Sources */,
 				B0EC849B1A9B4E7A0074DA13 /* XBuilder.cpp in Sources */,
+				B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */,
 				B0EC84951A9B4D560074DA13 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2756,6 +2760,7 @@
 					"-lopencv_core",
 					"-lopencv_features2d",
 					"-lopencv_highgui",
+					"-lopencv_imgproc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2768,6 +2773,7 @@
 					"-lopencv_core",
 					"-lopencv_features2d",
 					"-lopencv_highgui",
+					"-lopencv_imgproc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2945,6 +2951,7 @@
 				B0EC84971A9B4D560074DA13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0F3257E1A7E174700C9E7C6 /* Build configuration list for PBXProject "sfm" */ = {
 			isa = XCConfigurationList;
