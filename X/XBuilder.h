@@ -45,7 +45,7 @@ void getAlignedKeyPointsFromMatch(const std::vector<cv::KeyPoint>& imgpts1,
 
 typedef std::map< std::pair<int,int>,  std::vector<cv::DMatch> > MatchMap;
 
-const double f_ransac_threshold = 1.5;
+const double f_ransac_threshold = 1.70;
 
 struct P3D {
     cv::Point3d X;
@@ -56,6 +56,7 @@ struct XBuilder {
     // images
     vector<Mat> images;
     vector<string> image_names;
+    vector<bool> images_processed;
     
     // matching
     vector< vector<cv::KeyPoint> > imgKeypts;
@@ -71,7 +72,7 @@ struct XBuilder {
     std::vector<cv::Mat> R; // rotation
     std::vector<cv::Mat> t; // translation
     
-    std::vector<cv::Point3d> pointcloud;
+//    std::vector<cv::Point3d> pointcloud;
     std::vector<cv::Vec3b>   pointcloud_RGB;
     
     void open_imgs_dir(string image_dir);
@@ -79,11 +80,12 @@ struct XBuilder {
 
     void sfm();
     std::pair<int,int> KeyPoint_FMatrix_Matching ();
-    bool triangulate (cv::Mat R0, cv::Mat t0,
+    int triangulate (cv::Mat R0, cv::Mat t0,
                       cv::Mat  R1, cv::Mat t1,
                       vector<Point2f>& pt1, vector<Point2f>& pt2,
                       vector<Point3d>& X3);
     void doBA(); //BA
+    void printReprojectionError();
 };
 
 

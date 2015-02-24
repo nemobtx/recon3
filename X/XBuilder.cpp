@@ -92,22 +92,21 @@ void XBuilder::open_imgs_dir(string dir_name)
     
     cerr << "  reading camera calibration data from <" << calibFile << ">" << endl;
     
-    cv::Mat cam_matrix, distortion_coeff;
+//    cv::Mat cam_matrix, distortion_coeff;
     if(fs.open(calibFile,cv::FileStorage::READ)) {
-        fs["camera_matrix"]>>cam_matrix;
-        fs["distortion_coefficients"]>>distortion_coeff;
+        fs["camera_matrix"]>> this->K;
+        fs["distortion_coefficients"]>> this->distortion_coeff;
     } else {
         std::cerr << "! calibration file does not exist. Using temporay values" << std::endl;
         //no calibration matrix file - mockup calibration
         cv::Size imgs_size = images[0].size();
         //double max_w_h = MAX(imgs_size.height,imgs_size.width);
-        cam_matrix = (cv::Mat_<double>(3,3) <<	800. ,	0	,		imgs_size.width/2.0,
+        this->K = (cv::Mat_<double>(3,3) <<	800. ,	0	,		imgs_size.width/2.0,
                       0,		800.,	imgs_size.height/2.0,
                       0,			0,			1);
         distortion_coeff = cv::Mat_<double>::zeros(1,4);
     }
     
-    K = cam_matrix;
     cv::invert(K, Kinv); //get inverse of camera matrix
     
     std::cerr << "K=" << K << endl;
@@ -115,6 +114,23 @@ void XBuilder::open_imgs_dir(string dir_name)
 
     return;
 }
+
+cv::Vec3b getRGB (const P3D p3d, const vector<vector<cv::KeyPoint> >& imgKeypts, const vector<cv::Mat>& images)
+{
+    vector<Vec3b> colors;
+    for (int i=0; i<p3d.ids.size(); i++)
+        {
+        if (p3d.ids[i] >= 0)
+            {
+            cv::Vec3b rgb = images[i].at<cv::Vec3b>( imgKeypts[i][p3d.ids[i]].pt );
+            colors.push_back(rgb);
+            }
+        }
+    
+    cv::Scalar mcolor = cv::mean(colors);
+    return cv::Vec3b(mcolor[0],mcolor[1],mcolor[2]);
+}
+
 
 void XBuilder::fileSave(const std::string name)
 {
@@ -125,23 +141,18 @@ void XBuilder::fileSave(const std::string name)
     }
     
     double t = cv::getTickCount();
-    fprintf(fp, "%lu\n", pointcloud.size());
-    for (unsigned int i=0; i<pointcloud.size(); i++) {
+    fprintf(fp, "%lu\n", this->x3d.size());
+    for (unsigned int i=0; i<this->x3d.size(); i++)
+        {
         // get the RGB color value for the point
         cv::Vec3b rgbv(255,255,255);
-        if (pointcloud_RGB.size() > i) {
-            rgbv = pointcloud_RGB[i];
-        }
+        rgbv = getRGB (this->x3d[i], this->imgKeypts, this->images);
         
-        // 3D coordinates
-        //        pclp.x = pointcloud[i].x;
-        //        pclp.y = pointcloud[i].y;
-        //        pclp.z = pointcloud[i].z;
-        
+        cv::Point3d p3 = this->x3d[i].X;
         fprintf (fp, "%10.7f  %10.7f  %10.7f  %4d  %4d  %4d\n",
-                 pointcloud[i].x, pointcloud[i].y, pointcloud[i].z,
+                 p3.x, p3.y, p3.z,
                  rgbv[0], rgbv[1], rgbv[2]);
-    }
+        }
     fclose (fp);
     
     t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();

@@ -1,5 +1,5 @@
-dependencies: /Users/yndk/Dropbox/recon3/sfm/Common.cpp \
-  /Users/yndk/Dropbox/recon3/sfm/Common.h \
+dependencies: /Users/yndk/Documents/Projects/recon3/sfm/Common.cpp \
+  /Users/yndk/Documents/Projects/recon3/sfm/Common.h \
   /usr/local/include/opencv2/core/core.hpp \
   /usr/local/include/opencv2/core/types_c.h \
   /usr/local/include/opencv2/core/version.hpp \

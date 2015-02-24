@@ -38,7 +38,7 @@ protected:
     cv::Mat K;
     cv::Mat_<double> Kinv;
     
-    cv::Mat cam_matrix,distortion_coeff;
+    cv::Mat cam_matrix, distortion_coeff;
     cv::Mat distcoeff_32f;
     cv::Mat K_32f;
     

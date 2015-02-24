@@ -154,7 +154,7 @@ void open_imgs_dir(const char* dir_name,
     
     if (dp != NULL)
         {
-        while (ep = readdir (dp)) {
+        while ((ep = readdir (dp))) {
             if (ep->d_name[0] != '.')
                 files_.push_back(ep->d_name);
         }

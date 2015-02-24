@@ -106,8 +106,8 @@ std::pair<int,int> XBuilder::KeyPoint_FMatrix_Matching ()
             getAlignedKeyPointsFromMatch(imgKeypts[i], imgKeypts[k], matches_1to2, kpt1, kpt2);
             KeyPointsToPoints(kpt1, pt1);
             KeyPointsToPoints(kpt2, pt2);
-            vector<uchar> isInlier(pt1.size());
             
+            vector<uchar> isInlier(pt1.size());
             cv::Mat F = cv::findFundamentalMat(pt1, pt2,
                                                FM_RANSAC,
                                                f_ransac_threshold/*pixel threshold*/,
@@ -130,14 +130,15 @@ std::pair<int,int> XBuilder::KeyPoint_FMatrix_Matching ()
             imshow("view", disp);
             cv::waitKey(1000);
             
-            vector<uchar> status;
+            vector<uchar> statusH;
             cv::Mat H = cv::findHomography(pt1, pt2,
-                                           status,
+                                           statusH,
                                            CV_RANSAC,
-                                           f_ransac_threshold * 2./3.
+                                           f_ransac_threshold * .667
                                            ); //threshold from Snavely07
             
-            float hfratio =  cv::countNonZero(status) / cv::countNonZero(isInlier);
+            float hfratio =  cv::countNonZero(statusH) / (float)cv::countNonZero(isInlier);
+            cerr << " ratio (H/F) = " << hfratio << endl;
             if (hfratio < min_hfratio)
                 {
                 min_hfratio = hfratio;

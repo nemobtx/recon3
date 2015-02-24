@@ -2,9 +2,7 @@
 
 CXX = clang++  
 
-SRCS = main.cpp XBuilder.cpp sfm.cpp fmatrix_matching.cpp
-
-
+SRCS = main.cpp XBuilder.cpp sfm.cpp fmatrix_matching.cpp triangulation.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CFLAGS = -O2 \
@@ -14,7 +12,7 @@ LIBS =  ../sfm/3rdparty/SSBA-3.0/build/libV3D.a \
         ../sfm/3rdparty/SSBA-3.0/build/libcolamd.a \
         /usr/local/lib/libopencv* \
 
-xBulder: $(SRCS)
+xBulder: $(SRCS) XBuilder.h Makefile
 	$(CXX) $(CFLAGS) -o $@ $(SRCS) $(LIBS)
 
 .cpp.o:

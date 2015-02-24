@@ -164,7 +164,10 @@ Mat GetFundamentalMat(const vector<KeyPoint>& imgpts1,
                            0.99,
                            status);
 	}
-	
+#ifdef MY_FMATRIX_TH
+    cout << " MY_FMATRIX_TH = " << MY_FMATRIX_TH << endl;
+#endif
+    
 	vector<DMatch> new_matches;
 	cout << "F keeping " << countNonZero(status) << " / " << status.size() << endl;	
 	for (unsigned int i=0; i<status.size(); i++) {
@@ -367,7 +370,7 @@ bool FindCameraMatrices(const Mat& K,
 {
     //Find camera matrices
     
-    cout << "Find camera matrices...";
+    cout << "Find camera matrices..." << endl;
     double t = getTickCount();
     
     Mat F = GetFundamentalMat(imgpts1,

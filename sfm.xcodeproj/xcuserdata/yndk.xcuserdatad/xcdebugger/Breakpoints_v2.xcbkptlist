@@ -42,11 +42,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sfm/MultiCameraPnP.cpp"
-            timestampString = "445785796.75766"
+            timestampString = "446471152.897881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
+            landmarkName = "MultiCameraPnP::AdjustCurrentBundle()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sfm/MultiCameraPnP.cpp"
+            timestampString = "446460504.975754"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "MultiCameraPnP::GetBaseLineTriangulation()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sfm/FindCameraMatrices.cpp"
+            timestampString = "446461094.135297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
+            landmarkName = "FindCameraMatrices(const Mat&amp; K, const Mat&amp; Kinv, const Mat&amp; distcoeff, const vector&lt;KeyPoint&gt;&amp; imgpts1, const vector&lt;KeyPoint&gt;&amp; imgpts2, vector&lt;KeyPoint&gt;&amp; imgpts1_good, vector&lt;KeyPoint&gt;&amp; imgpts2_good, Matx34d&amp; P, Matx34d&amp; P1, vector&lt;DMatch&gt;&amp; matches, vector&lt;CloudPoint&gt;&amp; outCloud #ifdef __SFM__DEBUG__ ,const Mat&amp; img_1, const Mat&amp; img_2"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sfm/MultiCameraPnP.cpp"
+            timestampString = "446471152.897881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "MultiCameraPnP::RecoverDepthFromImages()"
             landmarkType = "5">
          </BreakpointContent>

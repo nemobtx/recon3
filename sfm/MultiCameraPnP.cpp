@@ -416,13 +416,35 @@ void MultiCameraPnP::AdjustCurrentBundle() {
     pointcloud_beforeBA = pcloud;
     GetRGBForPointCloud(pointcloud_beforeBA,pointCloudRGB_beforeBA);
     
-    cv::Mat _cam_matrix = K;
+    for (int k=0; k<10; k++)
+        {
+        cerr << "X: " << pcloud[k].pt << endl;
+        for (unsigned int i=0; i<pcloud[k].imgpt_for_img.size(); i++)
+            {
+            if (pcloud[k].imgpt_for_img[i] >= 0)
+                {
+                cv::Point2f cvp = imgpts[i][pcloud[k].imgpt_for_img[i]].pt;
+                cerr << "p2:" << cvp << endl;
+                }
+            }
+        cerr << "-" << endl;
+        }
+    cerr << "------" << endl;
+    for (int i=0; i<Pmats.size(); i++)
+        cerr << "P:" << Pmats[i] << endl;
+    
+    cerr << "K before BA" << endl << K << endl;
+    cerr << "cam_matrix=" << endl << cam_matrix << endl;
+    
+    cv::Mat _cam_matrix = K.clone(); // this is a soft copy, actually, _cam_matrix and K have the same memory!
     BundleAdjuster BA;
     BA.adjustBundle(pcloud,_cam_matrix,imgpts,Pmats);
     K = cam_matrix;
     Kinv = K.inv();
     
     cout << "use new K " << endl << K << endl;
+    cerr << "cam_matrix=" << endl << cam_matrix << endl;
+    cerr << "_cam_matrix_BA=" << endl << _cam_matrix << endl;
     
     return;
 }

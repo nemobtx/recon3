@@ -86,7 +86,9 @@ void BundleAdjuster::adjustBundle(vector<CloudPoint>& pointcloud,
 								  std::map<int ,cv::Matx34d>& Pmats
 								) 
 {
-	int N = Pmats.size(), M = pointcloud.size(), K = Count2DMeasurements(pointcloud);
+	int N = Pmats.size(),
+        M = pointcloud.size(),
+        K = Count2DMeasurements(pointcloud);
 	
 	cout << "N (cams) = " << N << " M (points) = " << M << " K (measurements) = " << K << endl;
 

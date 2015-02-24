@@ -1,5 +1,6 @@
-dependencies: /Users/yndk/Dropbox/recon3/sfm/MultiCameraDistance.cpp \
-  /Users/yndk/Dropbox/recon3/sfm/MultiCameraDistance.h \
+dependencies: \
+  /Users/yndk/Documents/Projects/recon3/sfm/MultiCameraDistance.cpp \
+  /Users/yndk/Documents/Projects/recon3/sfm/MultiCameraDistance.h \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/core/core_c.h \
   /usr/local/include/opencv2/core/types_c.h \
@@ -27,11 +28,11 @@ dependencies: /Users/yndk/Dropbox/recon3/sfm/MultiCameraDistance.cpp \
   /usr/local/include/opencv2/contrib/contrib.hpp \
   /usr/local/include/opencv2/contrib/retina.hpp \
   /usr/local/include/opencv2/contrib/openfabmap.hpp \
-  /Users/yndk/Dropbox/recon3/sfm/IDistance.h \
-  /Users/yndk/Dropbox/recon3/sfm/Triangulation.h \
-  /Users/yndk/Dropbox/recon3/sfm/Common.h \
-  /Users/yndk/Dropbox/recon3/sfm/IFeatureMatcher.h \
-  /Users/yndk/Dropbox/recon3/sfm/FindCameraMatrices.h \
-  /Users/yndk/Dropbox/recon3/sfm/RichFeatureMatcher.h \
-  /Users/yndk/Dropbox/recon3/sfm/OFFeatureMatcher.h \
-  /Users/yndk/Dropbox/recon3/sfm/AbstractFeatureMatcher.h
+  /Users/yndk/Documents/Projects/recon3/sfm/IDistance.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/Triangulation.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/Common.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/IFeatureMatcher.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/FindCameraMatrices.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/RichFeatureMatcher.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/OFFeatureMatcher.h \
+  /Users/yndk/Documents/Projects/recon3/sfm/AbstractFeatureMatcher.h

@@ -183,6 +183,13 @@ double TriangulatePoints(const vector<KeyPoint>& pt_set1,
 		
 		Mat_<double> X = IterativeLinearLSTriangulation(u,P,u1,P1);
 		
+        if (i==0) {
+            cerr << "X=" << X << endl;
+            cerr << "P0=" << P << endl;
+            cerr << "P1=" << P1 << endl;
+            cerr << "u0=" << u << endl;
+            cerr << "u1=" << u1 << endl;
+        }
 //		cout << "3D Point: " << X << endl;
 //		Mat_<double> x = Mat(P1) * X;
 //		cout <<	"P1 * Point: " << x << endl;

@@ -1,5 +1,6 @@
-dependencies: /Users/yndk/Dropbox/recon3/sfm/file_Interface.cpp \
-  /Users/yndk/Dropbox/recon3/sfm/file_Interface.h \
+dependencies: \
+  /Users/yndk/Documents/Projects/recon3/sfm/file_Interface.cpp \
+  /Users/yndk/Documents/Projects/recon3/sfm/file_Interface.h \
   /usr/local/include/opencv2/core/core.hpp \
   /usr/local/include/opencv2/core/types_c.h \
   /usr/local/include/opencv2/core/version.hpp \
