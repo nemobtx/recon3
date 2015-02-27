@@ -23,7 +23,7 @@ void makePmat(cv::Mat_<double>& P1, cv::Mat_<double> R1, cv::Mat_<double> t1)
 }
 
 
-static
+
 vector<double> reprojecionError (cv::Mat K,
                                  cv::Mat R, cv::Mat t,
                                  vector<cv::Point3d>& X3,
@@ -256,7 +256,8 @@ static Point3d triangulatePoint(const vector<Point2d>& ps,
 int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
                            cv::Mat  R1, cv::Mat t1,
                            vector<Point2f>& pt1, vector<Point2f>& pt2,
-                           vector<Point3d>& X3)
+                           vector<Point3d>& X3,
+                           vector<uchar>*pinlier)
 {
     X3.clear(); // returned, result of triangulation
     
@@ -284,13 +285,15 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     cerr << "! mean re-projection error = " << mse[0] << endl;
     cerr << "! max re-projection error = " << err[err.size()-1] << endl;
     cerr << "! median re-projection error = " << err[err.size()/2] << endl;
+    cerr << "---" << endl;
     
-    err = reprojecionError (this->K, Rs[1], ts[1], X3, pt1);
+    err = reprojecionError (this->K, Rs[1], ts[1], X3, pt2);
     std::sort(err.begin(), err.end());
     mse = cv::mean(err);
     cerr << "! mean re-projection error = " << mse[0] << endl;
     cerr << "! max re-projection error = " << err[err.size()-1] << endl;
     cerr << "! median re-projection error = " << err[err.size()/2] << endl;
+    cerr << "---" << endl;
     
     // check the polarity of the reconstruction: front or back of the camera
     vector<int> flag(pt1.size(), 0);
@@ -300,7 +303,14 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
         cv::Mat_<double> p3 = R1*x3 + t1;
         cv::Mat_<double> q3 = R0*x3 + t0;
         if (p3(2)>0 && q3(2)>0)
+            {
             flag[i] = 1; // good, in front of the two cameras
+            if (pinlier)
+                (*pinlier)[i]=1;
+            }
+        else
+            if (pinlier)
+                (*pinlier)[i]=0;
         }
     
     double ratio = cv::countNonZero(flag) / (double)X3.size();

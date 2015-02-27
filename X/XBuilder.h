@@ -27,6 +27,10 @@ using namespace cv;
 
 
 // -------------------------------------------------------------------------------- //
+vector<double> reprojecionError (cv::Mat K,
+                                 cv::Mat R, cv::Mat t,
+                                 vector<cv::Point3d>& X3,
+                                 vector<cv::Point2f>& pt1);
 
 void KeyPointsToPoints(const vector<KeyPoint>& kps, vector<Point2f>& ps);
 void PointsToKeyPoints(const vector<Point2f>& ps, vector<KeyPoint>& kps);
@@ -45,7 +49,11 @@ void getAlignedKeyPointsFromMatch(const std::vector<cv::KeyPoint>& imgpts1,
 
 typedef std::map< std::pair<int,int>,  std::vector<cv::DMatch> > MatchMap;
 
-const double f_ransac_threshold = 1.70;
+const double triangulation_err_th = 30.0;
+
+const double f_ransac_threshold = 2.50;
+const double f_ransac_confidence = 0.999;
+
 
 struct P3D {
     cv::Point3d X;
@@ -79,13 +87,19 @@ struct XBuilder {
     void fileSave(const std::string name);
 
     void sfm();
-    std::pair<int,int> KeyPoint_FMatrix_Matching ();
+    std::vector<pair<int,std::pair<int,int> > > KeyPoint_FMatrix_Matching ();
     int triangulate (cv::Mat R0, cv::Mat t0,
-                      cv::Mat  R1, cv::Mat t1,
-                      vector<Point2f>& pt1, vector<Point2f>& pt2,
-                      vector<Point3d>& X3);
+                     cv::Mat  R1, cv::Mat t1,
+                     vector<Point2f>& pt1, vector<Point2f>& pt2,
+                     vector<Point3d>& X3,
+                     vector<uchar>*pinlier=0);
+    
+    void Two_View_Reconstruction(vector<pair<int, std::pair<int,int> > >& pairs);
     void doBA(); //BA
     void printReprojectionError();
+    
+    void ba(); // bundle-adjustment
+    void ba_test();
 };
 
 

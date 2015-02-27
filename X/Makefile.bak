@@ -1,0 +1,34 @@
+.SUFFIXES: .cpp
+
+CXX = clang++  
+
+HFILES = ceres-ba.h XBuilder.h
+
+SRCS = main.cpp XBuilder.cpp sfm.cpp fmatrix_matching.cpp triangulation.cpp \
+       two_view_reconst.cpp \
+       bundle-adjust.cpp ceres-ba.cpp
+
+OBJS = $(SRCS:.cpp=.o)
+
+CFLAGS = -O2 \
+         -I/usr/local/opencv-2.4.9/include \
+
+LIBS =  /usr/local/lib/libopencv* \
+       -L/usr/local/lib \
+       -lglog -lgflags \
+       -lceres \
+       -framework Accelerate \
+       -lamd -lbtf -lcamd -lccolamd -lcholmod -lcolamd -lcxsparse -lklu -lldl -lrbio -lspqr -lumfpack -lsuitesparseconfig 
+
+xBulder: $(OBJS) Makefile
+	$(CXX) $(CFLAGS) -o $@ $(SRCS) $(LIBS)
+
+.cpp.o:
+	$(CXX) -c $(CFLAGS) $<
+
+clean:
+	rm -rf *.o
+
+depend:
+	makedepend $(CFLAGS) $(SRCS)
+

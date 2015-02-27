@@ -7,6 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03A37B81A9DF9BE00AE8F76 /* two_view_reconst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03A37B71A9DF9BE00AE8F76 /* two_view_reconst.cpp */; };
+		B03A37BE1AA041D800AE8F76 /* bundle-adjust.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03A37BD1AA041D800AE8F76 /* bundle-adjust.cpp */; };
+		B03A37C11AA0593100AE8F76 /* ceres-ba.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03A37BF1AA0593100AE8F76 /* ceres-ba.cpp */; };
+		B03A37DD1AA05B5700AE8F76 /* libamd.2.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C31AA05B5700AE8F76 /* libamd.2.3.1.a */; };
+		B03A37DE1AA05B5700AE8F76 /* libamd.2.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C41AA05B5700AE8F76 /* libamd.2.3.1.a */; };
+		B03A37DF1AA05B5700AE8F76 /* libbtf.1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C51AA05B5700AE8F76 /* libbtf.1.2.0.a */; };
+		B03A37E01AA05B5700AE8F76 /* libbtf.1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C61AA05B5700AE8F76 /* libbtf.1.2.0.a */; };
+		B03A37E11AA05B5700AE8F76 /* libcamd.2.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C71AA05B5700AE8F76 /* libcamd.2.3.1.a */; };
+		B03A37E21AA05B5700AE8F76 /* libcamd.2.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C81AA05B5700AE8F76 /* libcamd.2.3.1.a */; };
+		B03A37E31AA05B5700AE8F76 /* libccolamd.2.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37C91AA05B5700AE8F76 /* libccolamd.2.8.0.a */; };
+		B03A37E41AA05B5700AE8F76 /* libccolamd.2.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CA1AA05B5700AE8F76 /* libccolamd.2.8.0.a */; };
+		B03A37E51AA05B5700AE8F76 /* libcholmod.2.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CB1AA05B5700AE8F76 /* libcholmod.2.1.2.a */; };
+		B03A37E61AA05B5700AE8F76 /* libcholmod.2.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CC1AA05B5700AE8F76 /* libcholmod.2.1.2.a */; };
+		B03A37E71AA05B5700AE8F76 /* libcolamd.2.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CD1AA05B5700AE8F76 /* libcolamd.2.8.0.a */; };
+		B03A37E81AA05B5700AE8F76 /* libcolamd.2.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CE1AA05B5700AE8F76 /* libcolamd.2.8.0.a */; };
+		B03A37E91AA05B5700AE8F76 /* libcxsparse.3.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37CF1AA05B5700AE8F76 /* libcxsparse.3.1.2.a */; };
+		B03A37EA1AA05B5700AE8F76 /* libcxsparse.3.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D01AA05B5700AE8F76 /* libcxsparse.3.1.2.a */; };
+		B03A37EB1AA05B5700AE8F76 /* libklu.1.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D11AA05B5700AE8F76 /* libklu.1.2.1.a */; };
+		B03A37EC1AA05B5700AE8F76 /* libklu.1.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D21AA05B5700AE8F76 /* libklu.1.2.1.a */; };
+		B03A37ED1AA05B5700AE8F76 /* libldl.2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D31AA05B5700AE8F76 /* libldl.2.1.0.a */; };
+		B03A37EE1AA05B5700AE8F76 /* libldl.2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D41AA05B5700AE8F76 /* libldl.2.1.0.a */; };
+		B03A37EF1AA05B5700AE8F76 /* librbio.2.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D51AA05B5700AE8F76 /* librbio.2.1.1.a */; };
+		B03A37F01AA05B5700AE8F76 /* librbio.2.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D61AA05B5700AE8F76 /* librbio.2.1.1.a */; };
+		B03A37F11AA05B5700AE8F76 /* libspqr.1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D71AA05B5700AE8F76 /* libspqr.1.3.1.a */; };
+		B03A37F21AA05B5700AE8F76 /* libspqr.1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D81AA05B5700AE8F76 /* libspqr.1.3.1.a */; };
+		B03A37F31AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37D91AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */; };
+		B03A37F41AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37DA1AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */; };
+		B03A37F51AA05B5700AE8F76 /* libumfpack.5.6.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37DB1AA05B5700AE8F76 /* libumfpack.5.6.2.a */; };
+		B03A37F61AA05B5700AE8F76 /* libumfpack.5.6.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37DC1AA05B5700AE8F76 /* libumfpack.5.6.2.a */; };
+		B03A37F81AA05B9900AE8F76 /* libgflags.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37F71AA05B9900AE8F76 /* libgflags.a */; };
+		B03A37FA1AA05BC200AE8F76 /* libglog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37F91AA05BC200AE8F76 /* libglog.a */; };
+		B03A37FC1AA05BEE00AE8F76 /* libceres.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37FB1AA05BEE00AE8F76 /* libceres.a */; };
+		B03A37FE1AA05DD400AE8F76 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03A37FD1AA05DD300AE8F76 /* Accelerate.framework */; };
 		B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */; };
 		B04FDD701A9C8C5100C3547A /* triangulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */; };
 		B087CA0C1A8F305A001851F7 /* file_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA0A1A8F305A001851F7 /* file_Interface.cpp */; };
@@ -643,6 +676,40 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B03A37B71A9DF9BE00AE8F76 /* two_view_reconst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = two_view_reconst.cpp; sourceTree = "<group>"; };
+		B03A37BD1AA041D800AE8F76 /* bundle-adjust.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "bundle-adjust.cpp"; sourceTree = "<group>"; };
+		B03A37BF1AA0593100AE8F76 /* ceres-ba.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ceres-ba.cpp"; sourceTree = "<group>"; };
+		B03A37C01AA0593100AE8F76 /* ceres-ba.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ceres-ba.h"; sourceTree = "<group>"; };
+		B03A37C31AA05B5700AE8F76 /* libamd.2.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamd.2.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libamd.2.3.1.a"; sourceTree = "<group>"; };
+		B03A37C41AA05B5700AE8F76 /* libamd.2.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamd.2.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libamd.2.3.1.a"; sourceTree = "<group>"; };
+		B03A37C51AA05B5700AE8F76 /* libbtf.1.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbtf.1.2.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libbtf.1.2.0.a"; sourceTree = "<group>"; };
+		B03A37C61AA05B5700AE8F76 /* libbtf.1.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbtf.1.2.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libbtf.1.2.0.a"; sourceTree = "<group>"; };
+		B03A37C71AA05B5700AE8F76 /* libcamd.2.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamd.2.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcamd.2.3.1.a"; sourceTree = "<group>"; };
+		B03A37C81AA05B5700AE8F76 /* libcamd.2.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamd.2.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcamd.2.3.1.a"; sourceTree = "<group>"; };
+		B03A37C91AA05B5700AE8F76 /* libccolamd.2.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libccolamd.2.8.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libccolamd.2.8.0.a"; sourceTree = "<group>"; };
+		B03A37CA1AA05B5700AE8F76 /* libccolamd.2.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libccolamd.2.8.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libccolamd.2.8.0.a"; sourceTree = "<group>"; };
+		B03A37CB1AA05B5700AE8F76 /* libcholmod.2.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcholmod.2.1.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcholmod.2.1.2.a"; sourceTree = "<group>"; };
+		B03A37CC1AA05B5700AE8F76 /* libcholmod.2.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcholmod.2.1.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcholmod.2.1.2.a"; sourceTree = "<group>"; };
+		B03A37CD1AA05B5700AE8F76 /* libcolamd.2.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcolamd.2.8.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcolamd.2.8.0.a"; sourceTree = "<group>"; };
+		B03A37CE1AA05B5700AE8F76 /* libcolamd.2.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcolamd.2.8.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcolamd.2.8.0.a"; sourceTree = "<group>"; };
+		B03A37CF1AA05B5700AE8F76 /* libcxsparse.3.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcxsparse.3.1.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcxsparse.3.1.2.a"; sourceTree = "<group>"; };
+		B03A37D01AA05B5700AE8F76 /* libcxsparse.3.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcxsparse.3.1.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libcxsparse.3.1.2.a"; sourceTree = "<group>"; };
+		B03A37D11AA05B5700AE8F76 /* libklu.1.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libklu.1.2.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libklu.1.2.1.a"; sourceTree = "<group>"; };
+		B03A37D21AA05B5700AE8F76 /* libklu.1.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libklu.1.2.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libklu.1.2.1.a"; sourceTree = "<group>"; };
+		B03A37D31AA05B5700AE8F76 /* libldl.2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libldl.2.1.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libldl.2.1.0.a"; sourceTree = "<group>"; };
+		B03A37D41AA05B5700AE8F76 /* libldl.2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libldl.2.1.0.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libldl.2.1.0.a"; sourceTree = "<group>"; };
+		B03A37D51AA05B5700AE8F76 /* librbio.2.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librbio.2.1.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/librbio.2.1.1.a"; sourceTree = "<group>"; };
+		B03A37D61AA05B5700AE8F76 /* librbio.2.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librbio.2.1.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/librbio.2.1.1.a"; sourceTree = "<group>"; };
+		B03A37D71AA05B5700AE8F76 /* libspqr.1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspqr.1.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libspqr.1.3.1.a"; sourceTree = "<group>"; };
+		B03A37D81AA05B5700AE8F76 /* libspqr.1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspqr.1.3.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libspqr.1.3.1.a"; sourceTree = "<group>"; };
+		B03A37D91AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuitesparseconfig.4.2.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libsuitesparseconfig.4.2.1.a"; sourceTree = "<group>"; };
+		B03A37DA1AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuitesparseconfig.4.2.1.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libsuitesparseconfig.4.2.1.a"; sourceTree = "<group>"; };
+		B03A37DB1AA05B5700AE8F76 /* libumfpack.5.6.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libumfpack.5.6.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libumfpack.5.6.2.a"; sourceTree = "<group>"; };
+		B03A37DC1AA05B5700AE8F76 /* libumfpack.5.6.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libumfpack.5.6.2.a; path = "../../../../../../usr/local/Cellar/suite-sparse/4.2.1/lib/libumfpack.5.6.2.a"; sourceTree = "<group>"; };
+		B03A37F71AA05B9900AE8F76 /* libgflags.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgflags.a; path = ../../../../../../usr/local/Cellar/gflags/2.0/lib/libgflags.a; sourceTree = "<group>"; };
+		B03A37F91AA05BC200AE8F76 /* libglog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglog.a; path = ../../../../../../usr/local/Cellar/glog/0.3.3/lib/libglog.a; sourceTree = "<group>"; };
+		B03A37FB1AA05BEE00AE8F76 /* libceres.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libceres.a; path = ../../../../../../usr/local/lib/libceres.a; sourceTree = "<group>"; };
+		B03A37FD1AA05DD300AE8F76 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../../System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
 		B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmatrix_matching.cpp; sourceTree = "<group>"; };
 		B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulation.cpp; sourceTree = "<group>"; };
 		B087CA0A1A8F305A001851F7 /* file_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_Interface.cpp; sourceTree = "<group>"; };
@@ -1852,6 +1919,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B03A37E71AA05B5700AE8F76 /* libcolamd.2.8.0.a in Frameworks */,
+				B03A37E21AA05B5700AE8F76 /* libcamd.2.3.1.a in Frameworks */,
+				B03A37DE1AA05B5700AE8F76 /* libamd.2.3.1.a in Frameworks */,
+				B03A37E81AA05B5700AE8F76 /* libcolamd.2.8.0.a in Frameworks */,
+				B03A37E31AA05B5700AE8F76 /* libccolamd.2.8.0.a in Frameworks */,
+				B03A37F11AA05B5700AE8F76 /* libspqr.1.3.1.a in Frameworks */,
+				B03A37EB1AA05B5700AE8F76 /* libklu.1.2.1.a in Frameworks */,
+				B03A37E51AA05B5700AE8F76 /* libcholmod.2.1.2.a in Frameworks */,
+				B03A37EA1AA05B5700AE8F76 /* libcxsparse.3.1.2.a in Frameworks */,
+				B03A37F31AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a in Frameworks */,
+				B03A37E01AA05B5700AE8F76 /* libbtf.1.2.0.a in Frameworks */,
+				B03A37F51AA05B5700AE8F76 /* libumfpack.5.6.2.a in Frameworks */,
+				B03A37FA1AA05BC200AE8F76 /* libglog.a in Frameworks */,
+				B03A37F21AA05B5700AE8F76 /* libspqr.1.3.1.a in Frameworks */,
+				B03A37EE1AA05B5700AE8F76 /* libldl.2.1.0.a in Frameworks */,
+				B03A37ED1AA05B5700AE8F76 /* libldl.2.1.0.a in Frameworks */,
+				B03A37E91AA05B5700AE8F76 /* libcxsparse.3.1.2.a in Frameworks */,
+				B03A37E61AA05B5700AE8F76 /* libcholmod.2.1.2.a in Frameworks */,
+				B03A37F81AA05B9900AE8F76 /* libgflags.a in Frameworks */,
+				B03A37FC1AA05BEE00AE8F76 /* libceres.a in Frameworks */,
+				B03A37DD1AA05B5700AE8F76 /* libamd.2.3.1.a in Frameworks */,
+				B03A37F41AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a in Frameworks */,
+				B03A37DF1AA05B5700AE8F76 /* libbtf.1.2.0.a in Frameworks */,
+				B03A37F61AA05B5700AE8F76 /* libumfpack.5.6.2.a in Frameworks */,
+				B03A37E11AA05B5700AE8F76 /* libcamd.2.3.1.a in Frameworks */,
+				B03A37EC1AA05B5700AE8F76 /* libklu.1.2.1.a in Frameworks */,
+				B03A37E41AA05B5700AE8F76 /* libccolamd.2.8.0.a in Frameworks */,
+				B03A37FE1AA05DD400AE8F76 /* Accelerate.framework in Frameworks */,
+				B03A37EF1AA05B5700AE8F76 /* librbio.2.1.1.a in Frameworks */,
+				B03A37F01AA05B5700AE8F76 /* librbio.2.1.1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1867,6 +1964,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B03A37C21AA05A4700AE8F76 /* ceres-solver */ = {
+			isa = PBXGroup;
+			children = (
+				B03A37FD1AA05DD300AE8F76 /* Accelerate.framework */,
+				B03A37FB1AA05BEE00AE8F76 /* libceres.a */,
+				B03A37F91AA05BC200AE8F76 /* libglog.a */,
+				B03A37F71AA05B9900AE8F76 /* libgflags.a */,
+				B03A37C31AA05B5700AE8F76 /* libamd.2.3.1.a */,
+				B03A37C41AA05B5700AE8F76 /* libamd.2.3.1.a */,
+				B03A37C51AA05B5700AE8F76 /* libbtf.1.2.0.a */,
+				B03A37C61AA05B5700AE8F76 /* libbtf.1.2.0.a */,
+				B03A37C71AA05B5700AE8F76 /* libcamd.2.3.1.a */,
+				B03A37C81AA05B5700AE8F76 /* libcamd.2.3.1.a */,
+				B03A37C91AA05B5700AE8F76 /* libccolamd.2.8.0.a */,
+				B03A37CA1AA05B5700AE8F76 /* libccolamd.2.8.0.a */,
+				B03A37CB1AA05B5700AE8F76 /* libcholmod.2.1.2.a */,
+				B03A37CC1AA05B5700AE8F76 /* libcholmod.2.1.2.a */,
+				B03A37CD1AA05B5700AE8F76 /* libcolamd.2.8.0.a */,
+				B03A37CE1AA05B5700AE8F76 /* libcolamd.2.8.0.a */,
+				B03A37CF1AA05B5700AE8F76 /* libcxsparse.3.1.2.a */,
+				B03A37D01AA05B5700AE8F76 /* libcxsparse.3.1.2.a */,
+				B03A37D11AA05B5700AE8F76 /* libklu.1.2.1.a */,
+				B03A37D21AA05B5700AE8F76 /* libklu.1.2.1.a */,
+				B03A37D31AA05B5700AE8F76 /* libldl.2.1.0.a */,
+				B03A37D41AA05B5700AE8F76 /* libldl.2.1.0.a */,
+				B03A37D51AA05B5700AE8F76 /* librbio.2.1.1.a */,
+				B03A37D61AA05B5700AE8F76 /* librbio.2.1.1.a */,
+				B03A37D71AA05B5700AE8F76 /* libspqr.1.3.1.a */,
+				B03A37D81AA05B5700AE8F76 /* libspqr.1.3.1.a */,
+				B03A37D91AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */,
+				B03A37DA1AA05B5700AE8F76 /* libsuitesparseconfig.4.2.1.a */,
+				B03A37DB1AA05B5700AE8F76 /* libumfpack.5.6.2.a */,
+				B03A37DC1AA05B5700AE8F76 /* libumfpack.5.6.2.a */,
+			);
+			name = "ceres-solver";
+			sourceTree = "<group>";
+		};
 		B087CA121A8F3578001851F7 /* convert2pcd */ = {
 			isa = PBXGroup;
 			children = (
@@ -2475,8 +2609,13 @@
 				B0EC84991A9B4E7A0074DA13 /* XBuilder.cpp */,
 				B0EC849C1A9B529E0074DA13 /* sfm.cpp */,
 				B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */,
+				B03A37B71A9DF9BE00AE8F76 /* two_view_reconst.cpp */,
 				B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */,
 				B0EC849A1A9B4E7A0074DA13 /* XBuilder.h */,
+				B03A37BD1AA041D800AE8F76 /* bundle-adjust.cpp */,
+				B03A37BF1AA0593100AE8F76 /* ceres-ba.cpp */,
+				B03A37C01AA0593100AE8F76 /* ceres-ba.h */,
+				B03A37C21AA05A4700AE8F76 /* ceres-solver */,
 			);
 			path = X;
 			sourceTree = "<group>";
@@ -2681,7 +2820,10 @@
 				B0EC849B1A9B4E7A0074DA13 /* XBuilder.cpp in Sources */,
 				B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */,
 				B0EC84951A9B4D560074DA13 /* main.cpp in Sources */,
+				B03A37B81A9DF9BE00AE8F76 /* two_view_reconst.cpp in Sources */,
 				B04FDD701A9C8C5100C3547A /* triangulation.cpp in Sources */,
+				B03A37BE1AA041D800AE8F76 /* bundle-adjust.cpp in Sources */,
+				B03A37C11AA0593100AE8F76 /* ceres-ba.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2760,6 +2902,12 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/usr/local/Cellar/suite-sparse/4.2.1/lib",
+					/usr/local/Cellar/gflags/2.0/lib,
+					/usr/local/Cellar/glog/0.3.3/lib,
+				);
 				OTHER_LDFLAGS = (
 					"-lopencv_core",
 					"-lopencv_features2d",
@@ -2775,6 +2923,12 @@
 		B0EC84971A9B4D560074DA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/usr/local/Cellar/suite-sparse/4.2.1/lib",
+					/usr/local/Cellar/gflags/2.0/lib,
+					/usr/local/Cellar/glog/0.3.3/lib,
+				);
 				OTHER_LDFLAGS = (
 					"-lopencv_core",
 					"-lopencv_features2d",

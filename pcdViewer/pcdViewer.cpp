@@ -275,7 +275,7 @@ main (int argc, char** argv)
     my /= (float)N;
     mz /= (float)N;
     
-    mx=0, my=0, mz=0;
+    //mx=0, my=0, mz=0;
     
     for (int i=0; i<point_cloud_ptr->points.size(); i++) {
         point_cloud_ptr->points[i].x -= mx;
