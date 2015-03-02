@@ -21,7 +21,6 @@ using namespace std;
 struct Observation {
     int cam_id, str_id;
     vector<float> pt;
-    float p[2];
 };
 
 // Read a Bundle Adjustment in the Large dataset.
@@ -323,7 +322,7 @@ struct Bundler
     
     //bal_problem.SaveFile ("ba.txt");
     return 0;
-    }
+    } // adjust
     
     Bundler (int nc, int np, int no,
              vector<Observation>& obs,
