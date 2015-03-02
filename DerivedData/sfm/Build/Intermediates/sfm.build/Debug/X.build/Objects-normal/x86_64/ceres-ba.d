@@ -1,5 +1,5 @@
-dependencies: /Users/yndk/Documents/Projects/recon3/X/ceres-ba.cpp \
-  /Users/yndk/Documents/Projects/recon3/X/ceres-ba.h \
+dependencies: /Users/yndk/Desktop/recon3/X/ceres-ba.cpp \
+  /Users/yndk/Desktop/recon3/X/ceres-ba.h \
   /usr/local/include/ceres/ceres.h \
   /usr/local/include/ceres/autodiff_cost_function.h \
   /usr/local/include/ceres/internal/autodiff.h \

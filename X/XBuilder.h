@@ -64,7 +64,7 @@ struct XBuilder {
     // images
     vector<Mat> images;
     vector<string> image_names;
-    vector<bool> images_processed;
+    set<int> images_processed;
     
     // matching
     vector< vector<cv::KeyPoint> > imgKeypts;

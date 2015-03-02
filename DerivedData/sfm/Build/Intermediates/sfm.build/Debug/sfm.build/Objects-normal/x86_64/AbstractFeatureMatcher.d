@@ -1,7 +1,6 @@
-dependencies: \
-  /Users/yndk/Documents/Projects/recon3/sfm/AbstractFeatureMatcher.cpp \
-  /Users/yndk/Documents/Projects/recon3/sfm/AbstractFeatureMatcher.h \
-  /Users/yndk/Documents/Projects/recon3/sfm/IFeatureMatcher.h \
+dependencies: /Users/yndk/Desktop/recon3/sfm/AbstractFeatureMatcher.cpp \
+  /Users/yndk/Desktop/recon3/sfm/AbstractFeatureMatcher.h \
+  /Users/yndk/Desktop/recon3/sfm/IFeatureMatcher.h \
   /usr/local/include/opencv2/core/core.hpp \
   /usr/local/include/opencv2/core/types_c.h \
   /usr/local/include/opencv2/core/version.hpp \
@@ -11,5 +10,5 @@ dependencies: \
   /usr/local/include/opencv2/flann/miniflann.hpp \
   /usr/local/include/opencv2/flann/defines.h \
   /usr/local/include/opencv2/flann/config.h \
-  /Users/yndk/Documents/Projects/recon3/sfm/IDistance.h \
-  /Users/yndk/Documents/Projects/recon3/sfm/Common.h
+  /Users/yndk/Desktop/recon3/sfm/IDistance.h \
+  /Users/yndk/Desktop/recon3/sfm/Common.h

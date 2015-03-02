@@ -1,5 +1,5 @@
-dependencies: /Users/yndk/Documents/Projects/recon3/X/bundle-adjust.cpp \
-  /Users/yndk/Documents/Projects/recon3/X/XBuilder.h \
+dependencies: /Users/yndk/Desktop/recon3/X/bundle-adjust.cpp \
+  /Users/yndk/Desktop/recon3/X/XBuilder.h \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/core/core_c.h \
   /usr/local/include/opencv2/core/types_c.h \
@@ -27,7 +27,7 @@ dependencies: /Users/yndk/Documents/Projects/recon3/X/bundle-adjust.cpp \
   /usr/local/include/opencv2/contrib/contrib.hpp \
   /usr/local/include/opencv2/contrib/retina.hpp \
   /usr/local/include/opencv2/contrib/openfabmap.hpp \
-  /Users/yndk/Documents/Projects/recon3/X/ceres-ba.h \
+  /Users/yndk/Desktop/recon3/X/ceres-ba.h \
   /usr/local/include/ceres/ceres.h \
   /usr/local/include/ceres/autodiff_cost_function.h \
   /usr/local/include/ceres/internal/autodiff.h \

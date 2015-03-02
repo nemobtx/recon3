@@ -20,15 +20,15 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
     std::sort(pairs.begin(), pairs.end(), sort_ascending);
     cerr << "hfratios ---- " << endl;
     for (int i=0; i<pairs.size(); i++)
-        {
+    {
         cerr << pairs[i].first << endl;
-        }
+    }
     cerr << "-" << endl;
     
     bool next_flag = true;
     int next_pair=0;
     do // find the most probable pair
-        {
+    {
         int hfratio = pairs[next_pair].first;
         pair<int,int> min_pair = pairs[next_pair].second;
         ++next_pair;
@@ -47,7 +47,7 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         
         
 #if 0
-            {
+        {
             // re-do RANSAC for the two views
             vector<uchar> isInlier(pt1.size());
             cv::Mat F2 = cv::findFundamentalMat(pt1, pt2,
@@ -59,14 +59,14 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
             if (cv::countNonZero(isInlier) < 100) continue;
             
             if (cv::countNonZero(isInlier) < isInlier.size())
-                {
+            {
                 cerr << " new F-RANSAC finds " << cv::countNonZero(isInlier) << " out of " << isInlier.size() << endl;
                 vector<DMatch> matches2;
                 for (int i=0; i<isInlier.size(); i++)
                     if (isInlier[i])
-                        {
+                    {
                         matches2.push_back(matches_pairs[min_pair][i]);
-                        }
+                    }
                 cerr << " before: " << matches_pairs[min_pair].size() ;
                 matches_pairs[min_pair] = matches2;
                 cerr << " after: " << matches_pairs[min_pair].size() ;
@@ -74,17 +74,17 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
                 pt1.clear(); pt2.clear();
                 getAlignedPointsFromMatch(imgKeypts[min_pair.first], imgKeypts[min_pair.second], matches_pairs[min_pair], pt1, pt2);
                 this->mapF[min_pair] = F2;
-                }
             }
+        }
 #endif
         //
         cv::Mat_<double> F = this->mapF[min_pair];
         
         cv::Mat_<double> E = K.t() * F * K;
         if (fabs( cv::determinant(E) ) > 1E-07)
-            {
+        {
             fprintf(stderr, "det(E) = %.3le\n", fabs(cv::determinant(E)));
-            }
+        }
         fprintf(stderr, "! det(E) = %.3le\n", fabs(cv::determinant(E)));
         cv::SVD svd(E);
         cerr << " svd.u= " << endl << svd.u << endl;
@@ -94,9 +94,9 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         // check the ratio of the two largest singular values
         double s_ratio = svd.w.at<double>(0) / svd.w.at<double>(1);
         if (s_ratio < 0.7)
-            {
+        {
             cerr << "! s-ratio is too small\n";
-            }
+        }
         cv::Mat_<double> W = (cv::Mat_<double>(3,3) <<	0.,-1,0, 1,0,0, 0,0,1);
         cerr << "W = " << W << endl;
         
@@ -107,15 +107,15 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         t2 = -svd.u.col(2);
         
         if (cv::determinant(R1) < -0.7) // if it's det is -1
-            {
+        {
             cerr << " det(R1) == " << cv::determinant(R1) << endl;
             R1 *= -1;
-            }
+        }
         if (cv::determinant(R2) < -0.7) // if it's det is -1
-            {
+        {
             cerr << " det(R2) == " << cv::determinant(R2) << endl;
             R2 *= -1;
-            }
+        }
         
         cv::Mat_<double> R0 = (cv::Mat_<double>(3,3) << 1,0,0, 0,1,0, 0,0,1);
         cv::Mat_<double> t0 = (cv::Mat_<double>(3,1) << 0,0,0);
@@ -127,25 +127,25 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         
         std::vector< std::pair<int, pair<int,int> > > pratio;
         for (int i=0; i < Rs.size(); i++)
-            {
+        {
             for (int j=0; j < ts.size(); j++)
-                {
+            {
                 cerr << "positive test of " << i << " and " << j << endl;
                 int pos = triangulate (R0, t0, Rs[i], ts[j], pt1, pt2, X3);
                 pratio.push_back(make_pair(pos, make_pair(i,j)));
                 cerr << "-------" << endl;
-                }
             }
+        }
         
         std::sort(pratio.begin(), pratio.end(), sort_descending);
         for (int i=0; i<pratio.size(); i++)
             cerr << " pratio-" << i << " = " << pratio[i].first << endl;
         
         if (pratio[0].first < 90/*percent*/)
-            {
+        {
             cerr << "!! No positve reconstruction was obtained." << endl;
             continue;
-            }
+        }
         
         
         
@@ -182,15 +182,15 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         
         for (int i=0; i<inlier.size(); i++)
             if (inlier[i] && (err1[i]<triangulation_err_th) && (err2[i]<triangulation_err_th))
-                {
+            {
                 matches.push_back(matches_pairs[min_pair][i]);
-                }
+            }
         cerr << "! final matches result have " << matches.size() << " from " << matches_pairs[min_pair].size() << endl;
         if (matches.size() < 10)
-            {
+        {
             cerr << "***   2 View Reconstruction has too small number of correspondences" << matches.size() << endl;
             exit (0);
-            }
+        }
         // update the matches
         //
         matches_pairs[min_pair] = matches;
@@ -212,12 +212,12 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         
         // record
         for (int m=0; m<X3.size(); m++)
-            {
+        {
             this->x3d[m].X = X3[m];
             this->x3d[m].ids.resize(this->image_names.size(), -1);
             this->x3d[m].ids[min_pair.first] =matches_pairs[min_pair][m].queryIdx;
             this->x3d[m].ids[min_pair.second]=matches_pairs[min_pair][m].trainIdx;
-            }
+        }
         
         this->R.resize(images.size());
         this->t.resize(images.size());
@@ -226,39 +226,38 @@ void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >&
         this->R[min_pair.second] = Rs[r_id];
         this->t[min_pair.second] = ts[t_id];
         
-        this->images_processed.resize(images.size(), false);
-        this->images_processed[min_pair.first] = true;
-        this->images_processed[min_pair.second] = true;
+        this->images_processed.insert(min_pair.first);
+        this->images_processed.insert(min_pair.second);
         
         /***
-        for (int i=0; i<10; i++)
-            cerr << "X:" << X3[i] << endl;
-        for (int i=0; i<this->R.size(); i++)
-            cerr << "R:"<<this->R[i] << endl << "t:" << this->t[i] << endl;
-        ***/
+         for (int i=0; i<10; i++)
+         cerr << "X:" << X3[i] << endl;
+         for (int i=0; i<this->R.size(); i++)
+         cerr << "R:"<<this->R[i] << endl << "t:" << this->t[i] << endl;
+         ***/
         // the rest of the cams are packed with default; just in case ...
         for (int i=0; i<images.size(); i++)
             if (!(i==min_pair.first || i==min_pair.second))
-                {
+            {
                 this->R[i] = R0.clone();
                 this->t[i] = t0.clone();
-                }
+            }
         
-        }
+    }
     while (next_flag==true);
     
     cerr << "-------------------------------------------" << endl;
     cerr << "  Two view reconstruction result before BA " << endl;
     printReprojectionError();
-
+    
     // bundle-adjustment for the two views
     //
     this->ba ();
-
+    
     cerr << "-------------------------------------------" << endl;
     cerr << "  Two view reconstruction result after BA " << endl;
     printReprojectionError();
-
+    
     return;
 }
 // EOF //

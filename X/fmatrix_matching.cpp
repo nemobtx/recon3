@@ -191,6 +191,18 @@ cv::Mat ransacTest(const std::vector<cv::DMatch>& matches,
 }
 
 
+std::vector<cv::DMatch>
+flipMatches(const std::vector<cv::DMatch>& matches)
+{
+    std::vector<cv::DMatch> flip;
+    for(int i=0;i<matches.size();i++) {
+        flip.push_back(matches[i]);
+        swap(flip.back().queryIdx,flip.back().trainIdx);
+    }
+    return flip;
+}
+
+
 std::vector<pair<int, std::pair<int,int> > >
 XBuilder::KeyPoint_FMatrix_Matching ()
 {
@@ -293,10 +305,11 @@ XBuilder::KeyPoint_FMatrix_Matching ()
                 min_pair = std::make_pair(i,k);
                 }
             pairs.push_back(make_pair(hfratio*100, make_pair(i, k)));
+            
             // make the record of the matching
             this->matches_pairs[std::make_pair(i,k)] = matches_F;
+            this->matches_pairs[std::make_pair(k,i)] = flipMatches(matches_F);
             this->mapF[std::make_pair(i,k)] = F;
-            
             } // for(k
         } // for (i
     

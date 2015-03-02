@@ -2606,12 +2606,12 @@
 			isa = PBXGroup;
 			children = (
 				B0EC84941A9B4D560074DA13 /* main.cpp */,
+				B0EC849A1A9B4E7A0074DA13 /* XBuilder.h */,
 				B0EC84991A9B4E7A0074DA13 /* XBuilder.cpp */,
 				B0EC849C1A9B529E0074DA13 /* sfm.cpp */,
 				B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */,
 				B03A37B71A9DF9BE00AE8F76 /* two_view_reconst.cpp */,
 				B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */,
-				B0EC849A1A9B4E7A0074DA13 /* XBuilder.h */,
 				B03A37BD1AA041D800AE8F76 /* bundle-adjust.cpp */,
 				B03A37BF1AA0593100AE8F76 /* ceres-ba.cpp */,
 				B03A37C01AA0593100AE8F76 /* ceres-ba.h */,

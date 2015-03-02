@@ -165,7 +165,8 @@ void MultiCameraPnP::Find2D3DCorrespondences(int working_view,
             for (unsigned int pcldp=0; pcldp<pcloud.size(); pcldp++)
                 {
                 // see if corresponding point was found in this point
-                if (idx_in_old_view == pcloud[pcldp].imgpt_for_img[old_view] && pcloud_status[pcldp] == 0) //prevent duplicates
+                if (idx_in_old_view == pcloud[pcldp].imgpt_for_img[old_view]
+                    && pcloud_status[pcldp] == 0) //prevent duplicates
                     {
                     //3d point in cloud
                     p3cloud.push_back(pcloud[pcldp].pt);
@@ -366,6 +367,7 @@ bool MultiCameraPnP::TriangulatePointsBetweenViews(
         //matches[j].trainIdx = point in <working_view>
         new_triangulated[j].imgpt_for_img[older_view] = matches[j].queryIdx;	//2D reference to <older_view>
         new_triangulated[j].imgpt_for_img[working_view] = matches[j].trainIdx;		//2D reference to <working_view>
+        
         bool found_in_other_view = false;
         for (unsigned int view_ = 0; view_ < num_views; view_++) {
             if(view_ != older_view) {
@@ -515,7 +517,8 @@ void MultiCameraPnP::RecoverDepthFromImages()
         //find image with highest 2d-3d correspondance [Snavely07 4.2]
         unsigned int max_2d3d_view = -1, max_2d3d_count = 0;
         vector<cv::Point3f> max_3d; vector<cv::Point2f> max_2d;
-        for (unsigned int _i=0; _i < imgs.size(); _i++) {
+        for (unsigned int _i=0; _i < imgs.size(); _i++)
+            {
             if(done_views.find(_i) != done_views.end()) continue; //already done with this view
             
             vector<cv::Point3f> tmp3d; vector<cv::Point2f> tmp2d;
@@ -523,12 +526,14 @@ void MultiCameraPnP::RecoverDepthFromImages()
             
             Find2D3DCorrespondences(_i,tmp3d,tmp2d);
             
-            if(tmp3d.size() > max_2d3d_count) {
+            if(tmp3d.size() > max_2d3d_count)
+                {
                 max_2d3d_count = (int)tmp3d.size();
                 max_2d3d_view = _i;
-                max_3d = tmp3d; max_2d = tmp2d;
+                max_3d = tmp3d;
+                max_2d = tmp2d;
+                }
             }
-        }
         int i = max_2d3d_view; //highest 2d3d matching view
         
         std::cout << "-------------------------- " << imgs_names[i] << " --------------------------\n";

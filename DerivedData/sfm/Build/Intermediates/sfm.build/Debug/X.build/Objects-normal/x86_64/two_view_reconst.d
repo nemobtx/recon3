@@ -1,6 +1,5 @@
-dependencies: \
-  /Users/yndk/Documents/Projects/recon3/X/two_view_reconst.cpp \
-  /Users/yndk/Documents/Projects/recon3/X/XBuilder.h \
+dependencies: /Users/yndk/Desktop/recon3/X/two_view_reconst.cpp \
+  /Users/yndk/Desktop/recon3/X/XBuilder.h \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/core/core_c.h \
   /usr/local/include/opencv2/core/types_c.h \
