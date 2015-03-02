@@ -110,10 +110,14 @@ void XBuilder::sfm()
     while (images_processed.size() != images.size())
         {
         // find the image of highest correspondences among the images not processed,
+        
+        cv::Mat_<double> Rmat, tvec;
+        int image_selected=-1;
+        // 1. pose estimation
+        {
         vector<Point3f> pts3;
         vector<Point2f> pts2;
         size_t nCorrespMax=0;
-        int image_selected=0;
         for (int i=0; i<images.size(); i++)
             {
             if (!(images_processed.find(i) == images_processed.end()))
@@ -147,20 +151,37 @@ void XBuilder::sfm()
             }
         
         
-        Mat_<double> rvec, tvec;
+        Mat_<double> rvec;
         vector<uchar> inliers;
-        bool r = cv::solvePnPRansac(pts3, pts2, K, distortion_coeff, rvec, tvec,
+        cv::solvePnPRansac(pts3, pts2, K, distortion_coeff, rvec, tvec,
                            false,
                            1000,
                            f_ransac_threshold,
                            0.5 * (double)(pts2.size()/*minInliersCount*/),
                            inliers,
                            CV_EPNP);
-        cv::Mat_<double> Rmat;
         cv::Rodrigues(rvec, Rmat);
         
         cerr << " solvePnPRansac() found " << cv::countNonZero(inliers) << " inliers." << endl;
         cerr << "R:" << Rmat << endl << "t:" << tvec << endl;
+        } // pose estimation
+        
+        // now do triangulation
+        cerr << "----------- triangulation ----------- " << endl;
+        for (set<int>::iterator it=images_processed.begin(); it != images_processed.end(); ++it)
+            {
+            int img_id = *it;
+            std::pair<int,int> view_pair(img_id, image_selected);
+            cerr << "   pair (" << img_id << "," << image_selected << ")" << endl;
+            
+            vector<DMatch> &matches = matches_pairs[view_pair];
+            vector<Point2f> p1, p2;
+            vector<Point3d> X3;
+            vector<uchar> inlier;
+            getAlignedPointsFromMatch(imgKeypts[img_id], imgKeypts[image_selected], matches, p1, p2);
+            triangulate(this->R[img_id], this->t[img_id], Rmat, tvec, p1, p2, X3, &inlier);
+            }
+        images_processed.insert(image_selected);
         break;
         } // while
 }

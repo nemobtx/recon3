@@ -259,7 +259,10 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
                            vector<Point3d>& X3,
                            vector<uchar>*pinlier)
 {
+    cerr << "XBuilder::triangulate()" << endl;
+    
     X3.clear(); // returned, result of triangulation
+    if (pinlier) pinlier->resize(pt1.size());
     
     vector< cv::Mat > Rs, ts;
     Rs.push_back(R0);
@@ -276,24 +279,31 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
         
         cv::Point3d p3 = triangulatePoint(ps, Rs, ts, this->Kinv, m==0);
         X3.push_back (p3);
-
         }
     
-    vector<double> err = reprojecionError (this->K, Rs[0], ts[0], X3, pt1);
-    std::sort(err.begin(), err.end());
-    cv::Scalar mse = cv::mean(err);
+    vector<double> err1 = reprojecionError (this->K, Rs[0], ts[0], X3, pt1);
+    std::sort(err1.begin(), err1.end());
+    cv::Scalar mse = cv::mean(err1);
     cerr << "! mean re-projection error = " << mse[0] << endl;
-    cerr << "! max re-projection error = " << err[err.size()-1] << endl;
-    cerr << "! median re-projection error = " << err[err.size()/2] << endl;
+    cerr << "! max re-projection error = " << err1[err1.size()-1] << endl;
+    cerr << "! median re-projection error = " << err1[err1.size()/2] << endl;
     cerr << "---" << endl;
     
-    err = reprojecionError (this->K, Rs[1], ts[1], X3, pt2);
-    std::sort(err.begin(), err.end());
-    mse = cv::mean(err);
+    vector<double> err2 = reprojecionError (this->K, Rs[1], ts[1], X3, pt2);
+    std::sort(err2.begin(), err2.end());
+    mse = cv::mean(err2);
     cerr << "! mean re-projection error = " << mse[0] << endl;
-    cerr << "! max re-projection error = " << err[err.size()-1] << endl;
-    cerr << "! median re-projection error = " << err[err.size()/2] << endl;
+    cerr << "! max re-projection error = " << err2[err2.size()-1] << endl;
+    cerr << "! median re-projection error = " << err2[err2.size()/2] << endl;
     cerr << "---" << endl;
+    
+    vector<double> errall = err1;
+    for (int i=0; i<err2.size(); i++) errall.push_back(err2[i]);
+    std::sort(errall.begin(), errall.end());
+    
+    double d80 = errall[errall.size()*8/10];
+    double outlier_threshold = min (max(2.4*d80, 4.0), 16.0);
+    cerr << " -- outlier_threshold = " << outlier_threshold << " d80= " << d80 << endl;
     
     // check the polarity of the reconstruction: front or back of the camera
     vector<int> flag(pt1.size(), 0);
@@ -316,6 +326,12 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     double ratio = cv::countNonZero(flag) / (double)X3.size();
     
     cerr << "! positive ratio = " << ratio << endl;
+    
+    for (int i=0; i<pt1.size(); i++)
+        if (err1[i] > outlier_threshold || err2[i] > outlier_threshold)
+            (*pinlier)[i]=0;
+    
+    cerr << "! outliers removed: " << cv::countNonZero(*pinlier) << endl;
     
     return (int)(100*ratio);
 }
