@@ -13,7 +13,11 @@ using namespace std;
 
 XBuilder X;
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[])
+{
+    chdir("../../../../../X");
+    system("pwd");
+    
     string default_dir = ".";
     
     const string image_dir = argv[1]? argv[1] : default_dir;

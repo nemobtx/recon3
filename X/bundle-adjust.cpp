@@ -9,8 +9,10 @@
 // based on ceres-solver/suite-sparse
 // $ brew install ceres-solver
 
+#include <opencv2/opencv.hpp>
 #include "XBuilder.h"
 #include "ceres-ba.h"
+#include "ceres-pose.h"
 
 void XBuilder::ba_test()
 {
@@ -144,6 +146,38 @@ void XBuilder::ba_test()
     return;
 }
 
+
+void XBuilder::ba_pose(cv::Mat_<double> r, cv::Mat_<double> t, vector<Point2f>& p2, vector<Point3f>& p3)
+{
+    cerr << "*** ba_pose() " << endl;
+    cerr << "r=" << r.t() << " t=" << t.t() << endl;
+    
+    vector<double> rv, tv;
+    for (int i=0; i<3; i++)
+        rv.push_back(r(i)), tv.push_back(t(i));
+    
+    vector<ObsPose> obs;
+    for (int i=0; i<p2.size(); i++)
+        {
+        ObsPose o;
+        o.p.push_back(p2[i].x);
+        o.p.push_back(p2[i].y);
+        o.X.push_back(p3[i].x);
+        o.X.push_back(p3[i].y);
+        o.X.push_back(p3[i].z);
+        obs.push_back(o);
+        }
+
+    CeresPose (obs, rv, tv,
+               this->K.at<double>(0,0), this->K.at<double>(0,2), this->K.at<double>(1,2));
+    
+    
+    for (int i=0; i<3; i++)
+        r(i) = rv[i], t(i) = tv[i];
+
+    cerr << "*** ba_pose finished:" << endl
+    << "r=" << r.t() << " t=" << t.t() << endl;
+}
 
 void XBuilder::ba()
 {

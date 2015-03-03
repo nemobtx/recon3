@@ -141,6 +141,7 @@ void XBuilder::sfm()
                 image_selected = i;
                 }
             }
+        
         cerr << "Pose estimation for image " << image_selected << " ("
              << image_names[image_selected] << ") with " << pts2.size() << " 2d-3d" << endl;
         
@@ -153,19 +154,66 @@ void XBuilder::sfm()
         
         Mat_<double> rvec;
         vector<uchar> inliers;
+        double reproj_threshold = 1.2;
         cv::solvePnPRansac(pts3, pts2, K, distortion_coeff, rvec, tvec,
                            false,
                            1000,
-                           f_ransac_threshold,
-                           0.5 * (double)(pts2.size()/*minInliersCount*/),
+                           reproj_threshold,
+                           0.95 * (double)pts2.size(),  /*minInliersCount before stop*/
                            inliers,
                            CV_EPNP);
         cv::Rodrigues(rvec, Rmat);
         
         cerr << " solvePnPRansac() found " << cv::countNonZero(inliers) << " inliers." << endl;
         cerr << "R:" << Rmat << endl << "t:" << tvec << endl;
-        } // pose estimation
+        // test
+            {
+            vector<Point2f> proj;
+            cv::projectPoints(pts3, rvec, tvec, this->K, this->distortion_coeff, proj);
+            vector<uchar> outlier(proj.size(), 1);
+            for (int i=0; i<proj.size(); i++)
+                {
+                double e = sqrt( pow(proj[i].x-pts2[i].x, 2.) + pow(proj[i].y-pts2[i].y,2.) );
+                if (e <= reproj_threshold)
+                    outlier[i] = 0;
+                }
+            cerr << " test shows inliers of " << proj.size() - cv::countNonZero(outlier) << endl;
+            
+        // bundle for the pose R, t
         
+            vector<Point2f> pose2;
+            vector<Point3f> pose3;
+            for (int i=0; i<outlier.size(); i++)
+                if (outlier[i]==0)
+                    pose2.push_back (pts2[i]), pose3.push_back(pts3[i]);
+
+            vector<double> rep = reprojecionError (this->K,
+                                                   Rmat, tvec,
+                                                   pose3, pose2);
+            sort (rep.begin(), rep.end());
+//            for (int i=0; i<rep.size(); i+=10)
+//                cerr << (float)i/(float)rep.size() << "  " << rep[i] << endl;
+            cerr << " -- rms max for inliers = " << rep[rep.size()-1] << endl;
+            cerr << " -- rms min for inliers = " << rep[0] << endl;
+            cerr << " -- rms 50% for inliers (before opt) = " << rep[rep.size()/2] << endl;
+            
+            //ba_pose(rvec, tvec, pose2, pose3);
+            
+            solvePnP(pose3, pose2, this->K, this->distortion_coeff, rvec, tvec, true, CV_ITERATIVE);
+            
+            cv::Rodrigues(rvec, Rmat);
+            
+            rep = reprojecionError (this->K,
+                                    Rmat, tvec,
+                                    pose3, pose2);
+            sort (rep.begin(), rep.end());
+            cerr << " -- rms max for inliers (after opt) = " << rep[rep.size()-1] << endl;
+            cerr << " -- rms 50% for inliers (after opt) = " << rep[rep.size()/2] << endl;
+//            for (int i=0; i<rep.size(); i+=10)
+//                cerr << (float)i/(float)rep.size() << "  " << rep[i] << endl;
+            }
+        } // pose estimation
+          //exit (0);
         // now do triangulation
         cerr << "----------- triangulation ----------- " << endl;
         for (set<int>::iterator it=images_processed.begin(); it != images_processed.end(); ++it)

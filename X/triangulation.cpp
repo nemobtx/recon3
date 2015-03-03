@@ -37,8 +37,30 @@ vector<double> reprojecionError (cv::Mat K,
         p3 /= p3(2);
         p3 = K * p3;
         
-        double e1 = p3(0) - pt1[i].x;
-        double e2 = p3(1) - pt1[i].y;
+        double e1 = p3(0)/p3(2) - pt1[i].x;
+        double e2 = p3(1)/p3(2) - pt1[i].y;
+        
+        rms.push_back( sqrt(e1*e1 + e2*e2) );
+        }
+    return rms;
+}
+
+vector<double> reprojecionError (cv::Mat K,
+                                 cv::Mat R, cv::Mat t,
+                                 vector<cv::Point3f>& X3,
+                                 vector<cv::Point2f>& pt1)
+{
+    cerr << "reproj.K:" << endl << K << endl;
+    vector<double> rms;
+    for (int i=0; i<pt1.size(); i++)
+        {
+        cv::Mat_<double> x3 (X3[i]);
+        Mat_<double> p3 = R * x3 + t;
+        
+        p3 = K * p3;
+        
+        double e1 = p3(0)/p3(2) - pt1[i].x;
+        double e2 = p3(1)/p3(2) - pt1[i].y;
         
         rms.push_back( sqrt(e1*e1 + e2*e2) );
         }
@@ -331,7 +353,8 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
         if (err1[i] > outlier_threshold || err2[i] > outlier_threshold)
             (*pinlier)[i]=0;
     
-    cerr << "! outliers removed: " << cv::countNonZero(*pinlier) << endl;
+    if (pinlier)
+        cerr << "! outliers removed: " << cv::countNonZero(*pinlier) << endl;
     
     return (int)(100*ratio);
 }

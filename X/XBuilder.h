@@ -31,6 +31,10 @@ vector<double> reprojecionError (cv::Mat K,
                                  cv::Mat R, cv::Mat t,
                                  vector<cv::Point3d>& X3,
                                  vector<cv::Point2f>& pt1);
+vector<double> reprojecionError (cv::Mat K,
+                                 cv::Mat R, cv::Mat t,
+                                 vector<cv::Point3f>& X3,
+                                 vector<cv::Point2f>& pt1);
 
 void KeyPointsToPoints(const vector<KeyPoint>& kps, vector<Point2f>& ps);
 void PointsToKeyPoints(const vector<Point2f>& ps, vector<KeyPoint>& kps);
@@ -100,6 +104,7 @@ struct XBuilder {
     
     void ba(); // bundle-adjustment
     void ba_test();
+    void ba_pose(cv::Mat_<double> r, cv::Mat_<double> t, vector<Point2f>& pose2, vector<Point3f>& pose3);
 };
 
 
