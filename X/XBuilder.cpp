@@ -7,6 +7,7 @@
 //
 
 #include <dirent.h>
+#include <unistd.h>
 
 #include "XBuilder.h"
 
@@ -27,6 +28,22 @@ static bool hasEndingLower (string const &fullString_, string const &_ending)
     return hasEnding(fullstring,ending);
 }
 
+bool checkFileExist (const string filename)
+{
+    //  The access() function checks the accessibility of the file named by path
+    // for the access permissions indicated by amode.  The value of amode is the
+    // bitwise inclusive OR of the access permissions to be checked (R_OK for
+    // read permission, W_OK for write permission and X_OK for execute/search
+    // permission) or the existence test, F_OK.
+    // All components of the pathname path are checked for access permissions (including F_OK).
+    int res = access(filename.c_str(), R_OK | F_OK);
+    if (res<0) {
+        cerr << "** checkFileExist(" << filename << ") returned " << res << endl;
+    }
+    // res<0 means R_OK is not granted
+    return 0==res;
+}
+
 void XBuilder::open_imgs_dir(string dir_name)
 {
     if (dir_name.c_str() == NULL) {
@@ -36,29 +53,50 @@ void XBuilder::open_imgs_dir(string dir_name)
     
     vector<string> files_;
     
-//open a directory the POSIX way
+    const string inputlist = dir_name + "/" + string("imagelist.txt");
+    this->listFileExist = false;
     
-    DIR *dp;
-    struct dirent *ep;
-    dp = opendir (dir_name.c_str());
-    
-    if (dp != NULL)
+    if (false == checkFileExist (inputlist))
         {
-        while ((ep = readdir (dp))) {
-            if (ep->d_name[0] != '.')
-                files_.push_back(ep->d_name);
-        }
+        //open a directory the POSIX way
         
-        (void) closedir (dp);
+        DIR *dp;
+        struct dirent *ep;
+        dp = opendir (dir_name.c_str());
+        
+        if (dp != NULL)
+            {
+            while ((ep = readdir (dp))) {
+                if (ep->d_name[0] != '.')
+                    files_.push_back(ep->d_name);
+            }
+            (void) closedir (dp);
+            }
+        else
+            {
+            cerr << ("Couldn't open the directory");
+            return;
+            }
         }
-    else {
-        cerr << ("Couldn't open the directory");
-        return;
-    }
+    else
+        {
+        ifstream fs(inputlist);
+        while (!fs.eof())
+            {
+            string name;
+            fs >> name;
+            if (fs.eof()) break;
+            cerr << "imae file: " << name << endl;
+            files_.push_back(name);
+            }
+        fs.close();
+        listFileExist = true;
+        }
     
     // read all the images
     //
-    for (unsigned int i=0; i<files_.size(); i++) {
+    for (unsigned int i=0; i<files_.size(); i++)
+        {
         if (files_[i][0] == '.' ||
             !(hasEndingLower(files_[i],"jpg")||hasEndingLower(files_[i],"png")))
             {
@@ -73,8 +111,8 @@ void XBuilder::open_imgs_dir(string dir_name)
         image_names.push_back(files_[i]);
         images.push_back(m_);
         cerr << "Image read: " << files_[i] << " of size " << images[i].cols << "x" << images[i].rows << endl;
-    }
-    
+        }
+
     if(images.size() == 0) {
         cerr << "can't get image files" << endl;
         exit (1);

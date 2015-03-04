@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yndk/Dropbox/recon3/pcdViewer
+# Install script for directory: /Users/yndk/Desktop/recon3/pcdViewer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,7 +33,7 @@ else()
   set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 endif()
 
-file(WRITE "/Users/yndk/Dropbox/recon3/pcdViewer/build/${CMAKE_INSTALL_MANIFEST}" "")
+file(WRITE "/Users/yndk/Desktop/recon3/pcdViewer/build/${CMAKE_INSTALL_MANIFEST}" "")
 foreach(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  file(APPEND "/Users/yndk/Dropbox/recon3/pcdViewer/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  file(APPEND "/Users/yndk/Desktop/recon3/pcdViewer/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 endforeach()

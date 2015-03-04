@@ -181,20 +181,25 @@ void XBuilder::ba_pose(cv::Mat_<double> r, cv::Mat_<double> t, vector<Point2f>& 
 
 void XBuilder::ba()
 {
-    std::map<int/*old_index*/, int/*new_index*/> new_index;
-    std::map<int, int> old_index;
     int num_observations = 0;
+    vector<int> id_check(images.size(),0);
     for (int i=0; i<this->x3d.size(); i++)
         {
-        vector<int> &ids = x3d[i].ids;
-        int new_index_c = 0;
-        for (int m=0; m<ids.size(); m++)
-            if (ids[m]>=0)
+        for (int m=0; m<x3d[i].ids.size(); m++)
+            if (x3d[i].ids[m]>=0)
                 {
-                new_index[m] = new_index_c ++;
+                id_check[m]++;
                 num_observations ++;
                 }
         }
+
+    std::map<int/*old_index*/, int/*new_index*/> new_index;
+    int new_index_count = 0;
+    for (int i=0; i<id_check.size(); i++)
+        if (id_check[i]>0) // at least one observation in the i-th image
+            new_index[i] = new_index_count++;
+    
+    std::map<int, int> old_index;
     for (map<int,int>::iterator it=new_index.begin(); it!=new_index.end(); ++it)
         old_index[it->second/*new index*/] = it->first;/*old index*/
     

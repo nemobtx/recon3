@@ -348,13 +348,14 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     double ratio = cv::countNonZero(flag) / (double)X3.size();
     
     cerr << "! positive ratio = " << ratio << endl;
-    
-    for (int i=0; i<pt1.size(); i++)
-        if (err1[i] > outlier_threshold || err2[i] > outlier_threshold)
-            (*pinlier)[i]=0;
-    
     if (pinlier)
+        {
+        for (int i=0; i<pt1.size(); i++)
+            if (err1[i] > outlier_threshold || err2[i] > outlier_threshold)
+                (*pinlier)[i]=0;
+    
         cerr << "! outliers removed: " << cv::countNonZero(*pinlier) << endl;
+        }
     
     return (int)(100*ratio);
 }

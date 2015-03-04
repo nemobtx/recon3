@@ -66,6 +66,7 @@ struct P3D {
 
 struct XBuilder {
     // images
+    bool listFileExist;
     vector<Mat> images;
     vector<string> image_names;
     set<int> images_processed;

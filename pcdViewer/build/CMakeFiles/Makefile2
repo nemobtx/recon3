@@ -38,19 +38,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.1.1_1/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.1.2/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.1.1_1/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.1.2/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yndk/Dropbox/recon3/pcdViewer
+CMAKE_SOURCE_DIR = /Users/yndk/Desktop/recon3/pcdViewer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yndk/Dropbox/recon3/pcdViewer/build
+CMAKE_BINARY_DIR = /Users/yndk/Desktop/recon3/pcdViewer/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/pcdViewer.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/yndk/Dropbox/recon3/pcdViewer/build
 CMakeFiles/pcdViewer.dir/all:
 	$(MAKE) -f CMakeFiles/pcdViewer.dir/build.make CMakeFiles/pcdViewer.dir/depend
 	$(MAKE) -f CMakeFiles/pcdViewer.dir/build.make CMakeFiles/pcdViewer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/yndk/Dropbox/recon3/pcdViewer/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/yndk/Desktop/recon3/pcdViewer/build/CMakeFiles  1
 	@echo "Built target pcdViewer"
 .PHONY : CMakeFiles/pcdViewer.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/pcdViewer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/pcdViewer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yndk/Dropbox/recon3/pcdViewer/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yndk/Desktop/recon3/pcdViewer/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/pcdViewer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yndk/Dropbox/recon3/pcdViewer/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yndk/Desktop/recon3/pcdViewer/build/CMakeFiles 0
 .PHONY : CMakeFiles/pcdViewer.dir/rule
 
 # Convenience name for target.

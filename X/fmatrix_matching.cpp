@@ -304,7 +304,11 @@ XBuilder::KeyPoint_FMatrix_Matching ()
                 min_hfratio = hfratio;
                 min_pair = std::make_pair(i,k);
                 }
-            pairs.push_back(make_pair(hfratio*100, make_pair(i, k)));
+            
+            if (listFileExist)
+                pairs.push_back(make_pair(60+i+k, make_pair(i, k)));
+            else
+                pairs.push_back(make_pair(hfratio*100, make_pair(i, k)));
             
             // make the record of the matching
             this->matches_pairs[std::make_pair(i,k)] = matches_F;

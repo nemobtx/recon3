@@ -10,7 +10,7 @@ SRCS = main.cpp XBuilder.cpp sfm.cpp fmatrix_matching.cpp triangulation.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
-CFLAGS = -O2 \
+CFLAGS = -O3 \
          -I/usr/local/include \
          -I/usr/local/include/eigen3
 
