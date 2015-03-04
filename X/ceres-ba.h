@@ -190,6 +190,8 @@ struct Bundler
          x0
          y0
          */
+
+        double pp_bound() { return pp_bound_; }
         
     private:
         template<typename T>
@@ -309,6 +311,15 @@ struct Bundler
                                  );
         }
     
+    problem.SetParameterLowerBound(bal_problem.mutable_shared_internals(), 1,
+                                   bal_problem.mutable_shared_internals()[1]-bal_problem.pp_bound());
+    problem.SetParameterUpperBound(bal_problem.mutable_shared_internals(), 1,
+                                   bal_problem.mutable_shared_internals()[1]+bal_problem.pp_bound());
+    problem.SetParameterLowerBound(bal_problem.mutable_shared_internals(), 2,
+                                   bal_problem.mutable_shared_internals()[2]-bal_problem.pp_bound());
+    problem.SetParameterUpperBound(bal_problem.mutable_shared_internals(), 2,
+                                   bal_problem.mutable_shared_internals()[2]+bal_problem.pp_bound());
+
     // Make Ceres automatically detect the bundle structure. Note that the
     // standard solver, SPARSE_NORMAL_CHOLESKY, also works fine but it is slower
     // for standard bundle adjustment problems.

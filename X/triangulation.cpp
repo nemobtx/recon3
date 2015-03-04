@@ -304,20 +304,20 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
         }
     
     vector<double> err1 = reprojecionError (this->K, Rs[0], ts[0], X3, pt1);
-    std::sort(err1.begin(), err1.end());
-    cv::Scalar mse = cv::mean(err1);
-    cerr << "! mean re-projection error = " << mse[0] << endl;
-    cerr << "! max re-projection error = " << err1[err1.size()-1] << endl;
-    cerr << "! median re-projection error = " << err1[err1.size()/2] << endl;
-    cerr << "---" << endl;
+//    std::sort(err1.begin(), err1.end());
+//    cv::Scalar mse = cv::mean(err1);
+//    cerr << "! mean re-projection error = " << mse[0] << endl;
+//    cerr << "! max re-projection error = " << err1[err1.size()-1] << endl;
+//    cerr << "! median re-projection error = " << err1[err1.size()/2] << endl;
+//    cerr << "---" << endl;
     
     vector<double> err2 = reprojecionError (this->K, Rs[1], ts[1], X3, pt2);
-    std::sort(err2.begin(), err2.end());
-    mse = cv::mean(err2);
-    cerr << "! mean re-projection error = " << mse[0] << endl;
-    cerr << "! max re-projection error = " << err2[err2.size()-1] << endl;
-    cerr << "! median re-projection error = " << err2[err2.size()/2] << endl;
-    cerr << "---" << endl;
+//    std::sort(err2.begin(), err2.end());
+//    mse = cv::mean(err2);
+//    cerr << "! mean re-projection error = " << mse[0] << endl;
+//    cerr << "! max re-projection error = " << err2[err2.size()-1] << endl;
+//    cerr << "! median re-projection error = " << err2[err2.size()/2] << endl;
+//    cerr << "---" << endl;
     
     vector<double> errall = err1;
     for (int i=0; i<err2.size(); i++) errall.push_back(err2[i]);
@@ -348,13 +348,16 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     double ratio = cv::countNonZero(flag) / (double)X3.size();
     
     cerr << "! positive ratio = " << ratio << endl;
+    
+    //outlier_threshold = 5.0;
     if (pinlier)
         {
         for (int i=0; i<pt1.size(); i++)
             if (err1[i] > outlier_threshold || err2[i] > outlier_threshold)
                 (*pinlier)[i]=0;
     
-        cerr << "! outliers removed: " << cv::countNonZero(*pinlier) << endl;
+        cerr << "! inliers obtained: " << cv::countNonZero(*pinlier) << " out of " << pt2.size() << endl
+        << " using threshold " << outlier_threshold << endl;
         }
     
     return (int)(100*ratio);

@@ -97,6 +97,12 @@ vector<pair<int,int> >
     return record;
 } // get2D3D
 
+cv::Scalar getRandomColor()
+{
+    static RNG rng(time(0));
+    
+    return cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+}
 
 void XBuilder::sfm()
 {
@@ -241,28 +247,75 @@ void XBuilder::sfm()
             cerr << "  ** After BA " << endl;
             printReprojectionError();
 
+            for (int i=0; i<images.size(); i++)
+                //if (images_processed.find(i)!=images_processed.end())
+                {
+                cerr << "R" << i << ":" << endl << this->R[i] << endl;
+                cerr << "t" << i << ":" << endl << this->t[i].t() << endl;
+                }
+            for (int i=0; i<images.size(); i++)
+                if (images_processed.find(i)!=images_processed.end())
+                {
+                Mat C = - this->R[i].t()*this->t[i];
+                cerr << "C." << image_names[i] << ":" << endl << C.t() << endl;
+                }
+            cerr << "K:" << this->K << endl << endl;
+            
             } // if (flag_do_bundle)
         
         } // pose estimation
-
+        
+        
         // now do triangulation
         cerr << "----------- triangulation ----------- " << endl;
         
-        if (0)
         for (set<int>::iterator it=images_processed.begin(); it != images_processed.end(); ++it)
             {
-            int img_id = *it;
-            std::pair<int,int> view_pair(img_id, image_selected);
-            cerr << "   pair (" << img_id << "," << image_selected << ")" << endl;
+            int done_img_id = *it;
+            std::pair<int,int> view_pair(done_img_id, image_selected);
+            cerr << "   pair (" << image_names[done_img_id] << "," << image_names[image_selected] << ")" << endl;
             
             vector<DMatch> &matches = matches_pairs[view_pair];
             vector<Point2f> p1, p2;
+            getAlignedPointsFromMatch(imgKeypts[done_img_id], imgKeypts[image_selected],
+                                      matches,
+                                      p1, p2);
+
             vector<Point3d> X3;
             vector<uchar> inlier;
-            getAlignedPointsFromMatch(imgKeypts[img_id], imgKeypts[image_selected], matches, p1, p2);
-            triangulate(this->R[img_id], this->t[img_id], Rmat, tvec, p1, p2, X3, &inlier);
+            triangulate(this->R[done_img_id], this->t[done_img_id],
+                        this->R[image_selected], this->t[image_selected],
+                        p1, p2, X3, &inlier);
+            cerr << "** triangulation found new pairs: " << cv::countNonZero(inlier) << endl;
+
+            vector<int> already_used_for_3d(matches.size(),false);
+            for (int k=0; k<matches.size(); k++)
+                for (int i=0; i<x3d.size(); i++)
+                    if (x3d[i].ids[done_img_id]==matches[k].queryIdx)
+                        {
+                        already_used_for_3d[k]=true;
+                        //   cerr << " ! already reconstructed" << endl;
+                        inlier[k]=0; // remove from the list
+                        }
+            cerr << "** new pairs after removing those of X: " << cv::countNonZero(inlier) << endl;
+            
+            cv::Mat img_done = images[done_img_id].clone();
+            cv::Mat img_new  = images[image_selected].clone();
+            for (int i=0; i<inlier.size(); i++)
+                if (inlier[i])
+                    {
+                    cv::Scalar color = getRandomColor();
+                    cv::circle(img_done, p1[i], 7, color, 2);
+                    cv::circle(img_done, p1[i], 2, color);
+                    cv::circle(img_new, p2[i], 7, color, 2);
+                    cv::circle(img_new, p2[i], 2, color);
+                    }
+            imshow("img_done", img_done);
+            imshow("img_new", img_new);
+            cv::waitKey();
             }
 
         images_processed.insert(image_selected);
+        //break;
         } // while
 }
