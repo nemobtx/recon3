@@ -54,54 +54,39 @@ void XBuilder::printReprojectionError()
     cerr << "  ----" << endl;
 }
 
-vector<pair<int,int> >
-    get2D3D (vector<Point2f>& q2, vector<Point3f>& q3, int new_image_id,
-              set<int>& images_processed,
-              MatchMap& matches_pairs,
-              vector<P3D>& x3d,
-              vector<vector<KeyPoint> >& imgKeypts
-              )
+static
+cv::Mat_<double> makeRt(cv::Mat_<double> R1, cv::Mat_<double> t1)
 {
-    q2.clear();
-    q3.clear();
-    vector<bool> usedX3(x3d.size(), false); // indicates whether
-    
-    vector<pair<int,int> > record;
-    
-    cerr << "get2d3d()" << endl;
-    // find 2d-3D pairs from every possible image pairs
-    
-    for (set<int>::iterator it=images_processed.begin(); it!=images_processed.end(); it++)
-    {
-    int used_img_id = *it;
-    std::pair<int,int> pair(used_img_id, new_image_id);
-    vector<DMatch> matches = matches_pairs[pair];
-    int count=0;
-    for (int m=0; m<matches.size(); m++)
+    cv::Mat_<double> P1(3,4);
+    for (int r=0; r<3; r++)
         {
-        for (int i3=0; i3<x3d.size(); i3++)
-            if (x3d[i3].ids[used_img_id] == matches[m].queryIdx
-                && usedX3[i3]==false)
-                {
-                q3.push_back(x3d[i3].X);
-                q2.push_back(imgKeypts[new_image_id][matches[m].trainIdx].pt);
-                usedX3[i3]=true;
-                record.push_back (make_pair(i3, matches[m].trainIdx)); // x3d.ids[i3][new_image_id] = matches[m].trainIdx;
-                count++;
-                }
+        int c=0;
+        for (; c<3; c++)
+            P1(r,c) = R1(r,c);
+        P1(r,c) = t1(r);
         }
-    
-    cerr << "\t\t>>  pair(" << used_img_id << "," << new_image_id << ") has " << count << " 2d3d matches" << endl;
-    }
-    cerr << " --- " << endl;
-    return record;
-} // get2D3D
+    return P1;
+}
 
-cv::Scalar getRandomColor()
+vector<cv::Mat_<double> > getTrifocal (vector<Mat_<double> >& Parray, int ii, int jj, int kk)
 {
-    static RNG rng(time(0));
+    vector<cv::Mat_<double> > T(3);
+    for (int i=0; i<3; i++) T[i] = cv::Mat_<double>(3,3);
     
-    return cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+    vector<cv::Mat_<double> > P;
+    P.push_back(Parray[ii].clone());
+    P.push_back(Parray[jj].clone());
+    P.push_back(Parray[kk].clone());
+    
+    cv::Mat_<double> H = cv::Mat_<double>::eye(4,4);
+    for (int r=0; r<3; r++) for (int c=0; c<4; c++) H(r,c) = P[0](r,c);
+    cv::Mat_<double> Hinv = H.inv();
+    for (int i=0; i<3; i++)
+        P[i] = P[i] * Hinv;
+    
+    for (int i=0; i<3; i++)
+        T[i] = P[1].col(i)*P[2].row(4).t() - P[1].row(4)*P[2].row(i).t();
+    return T;
 }
 
 void XBuilder::sfm()
@@ -115,207 +100,88 @@ void XBuilder::sfm()
     // 2. 2-view reconstruction
     Two_View_Reconstruction(pairs);
     
-    
     fileSave("result3D-2View.txt");
 
     // reconstruction for other views
-
-    while (images_processed.size() != images.size())
+    //
+    doPnP();
+    
+    {
+    for (int n=0; n<this->images.size(); n++)
         {
-        // find the image of highest correspondences among the images not processed,
-        
-        cv::Mat_<double> Rmat, tvec;
-        int image_selected=-1;
-        // 1. pose estimation
-        {
-        vector<Point3f> pts3;
-        vector<Point2f> pts2;
-        vector<pair<int,int> > record_3d2d;
-        size_t nCorrespMax=0;
-        for (int i=0; i<images.size(); i++)
-            {
-            if (!(images_processed.find(i) == images_processed.end()))
-                continue;
-            
-            // images[i] is not used
-            cerr << "-- image for insertion: " << i << endl;
-            
-            vector<Point3f> q3;
-            vector<Point2f> q2;
-            
-            vector<pair<int,int> > record
-                = get2D3D (q2,q3, i/*new_image_id*/,
-                           images_processed, matches_pairs, x3d, imgKeypts);
-
-            cerr << "\t q2/q3 has " << q2.size() << endl;
-            
-            if (q2.size() > nCorrespMax)
-                {
-                nCorrespMax = q2.size();
-                pts2 = q2; pts3 = q3;
-                record_3d2d = record;
-                image_selected = i;
-                }
-            }
-        
-        cerr << "Pose estimation for image " << image_selected << " ("
-             << image_names[image_selected] << ") with " << pts2.size() << " 2d-3d" << endl;
-        
-        if (pts2.size() < 100)
-            {
-            cerr << " 2d-3d correspondences small" << endl;
-            continue;
-            }
-        
-        
-        Mat_<double> rvec;
-        vector<int> inliers;
-        Mat mat_inliers;
-        double reproj_threshold = 1.2;
-        cv::solvePnPRansac(pts3, pts2, K, distortion_coeff, rvec, tvec,
-                           false,
-                           1000,
-                           reproj_threshold,
-                           0.95 * (double)pts2.size(),  /*minInliersCount before stop*/
-                           inliers, // Output vector that contains indices of inliers
-                           CV_EPNP);
-        cv::Rodrigues(rvec, Rmat);
-        if (fabs((cv::determinant(Rmat)-1.0)) > 1E-7)
-            {
-            cerr << "check determinamt of Rmat: " << cv::determinant(Rmat) << endl;
-            }
-        //cerr << " solvePnPRansac() found inliers of size " << inliers.size() << endl;
-        
-        if (0) {
-            vector<Point2f> pose2;
-            vector<Point3f> pose3;
-            for (int i=0; i<inliers.size(); i++)
-                pose2.push_back (pts2[inliers[i]]),
-                pose3.push_back (pts3[inliers[i]]);
-            
-            vector<double> rep = reprojecionError (this->K,
-                                                   Rmat, tvec,
-                                                   pose3, pose2);
-            sort (rep.begin(), rep.end());
-            //            for (int i=0; i<rep.size(); i+=10)
-            //                cerr << (float)i/(float)rep.size() << "  " << rep[i] << endl;
-            cerr << " -- rms max for inliers = " << rep[rep.size()-1] << endl;
-            cerr << " -- rms min for inliers = " << rep[0] << endl;
-            cerr << " -- rms 50% for inliers (from solvePnPRansac) = " << rep[rep.size()/2] << endl;
-            for (int i=0; i<rep.size(); i++)
-                cerr << i/(double)rep.size() << "    " << rep[i] << endl;
+        this->P[n] = this->K * makeRt(this->R[n], this->t[n]);
         }
-        cerr << "R:" << Rmat << endl << "t:" << tvec << endl;
-        cerr << " ++++++++++++++++++++ " << endl;
-        bool flag_do_bundle = true;
-        if (flag_do_bundle)
-            {
-            vector<Point2f> proj;
-            cv::projectPoints(pts3, rvec, tvec, this->K, this->distortion_coeff, proj);
-            vector<uchar> outlier(proj.size(), true);
-            for (int i=0; i<proj.size(); i++)
+    }
+    
+    set< pair<int,int> > usedObs;
+    for (int i=0; i<x3d.size(); i++)
+        for (int v=0; v<x3d[i].ids.size(); v++)
+            if (x3d[i].ids[v] >= 0)
+                usedObs.insert(make_pair(v, x3d[i].ids[v]));
+    
+    // find unmatched observations through the view if there is
+    //
+    for (int i=0; i<x3d.size(); i++)
+        {
+        for (int v=0; v<x3d[i].ids.size(); v++)
+            if (x3d[i].ids[v]<0)
                 {
-                double e = sqrt( pow(proj[i].x-pts2[i].x, 2.) + pow(proj[i].y-pts2[i].y,2.) );
-                if (e <= reproj_threshold)
-                    outlier[i] = false;
-                }
-            cerr << " test shows inliers of " << proj.size() - cv::countNonZero(outlier) << endl;
-
-            // register the observations from the inliers, found through solvePnPRansac
-            //
-            int nRegistered=0;
-            for (int i=0; i<record_3d2d.size(); i++)
-                if (outlier[i]==false)
-                    {
-                    this->x3d[record_3d2d[i].first].ids[image_selected] = record_3d2d[i].second;
-                    nRegistered++;
-                    }
-            cerr << "x3d has been registerd " << nRegistered << " new observations from image " << image_names[image_selected] << endl;
-            
-            // update the computed motion
-            //
-            this->R[image_selected] = Rmat.clone();
-            this->t[image_selected] = tvec.clone();
-            
-            cerr << "-------------------------------------------" << endl;
-            cerr << "  Before BA " << endl;
-            printReprojectionError();
-
-            this->ba();
-            
-            cerr << "-------------------------------------------" << endl;
-            cerr << "  ** After BA " << endl;
-            printReprojectionError();
-
-            for (int i=0; i<images.size(); i++)
-                //if (images_processed.find(i)!=images_processed.end())
-                {
-                cerr << "R" << i << ":" << endl << this->R[i] << endl;
-                cerr << "t" << i << ":" << endl << this->t[i].t() << endl;
-                }
-            for (int i=0; i<images.size(); i++)
-                if (images_processed.find(i)!=images_processed.end())
-                {
-                Mat C = - this->R[i].t()*this->t[i];
-                cerr << "C." << image_names[i] << ":" << endl << C.t() << endl;
-                }
-            cerr << "K:" << this->K << endl << endl;
-            
-            } // if (flag_do_bundle)
-        
-        } // pose estimation
-        
-        
-        // now do triangulation
-        cerr << "----------- triangulation ----------- " << endl;
-        
-        for (set<int>::iterator it=images_processed.begin(); it != images_processed.end(); ++it)
-            {
-            int done_img_id = *it;
-            std::pair<int,int> view_pair(done_img_id, image_selected);
-            cerr << "   pair (" << image_names[done_img_id] << "," << image_names[image_selected] << ")" << endl;
-            
-            vector<DMatch> &matches = matches_pairs[view_pair];
-            vector<Point2f> p1, p2;
-            getAlignedPointsFromMatch(imgKeypts[done_img_id], imgKeypts[image_selected],
-                                      matches,
-                                      p1, p2);
-
-            vector<Point3d> X3;
-            vector<uchar> inlier;
-            triangulate(this->R[done_img_id], this->t[done_img_id],
-                        this->R[image_selected], this->t[image_selected],
-                        p1, p2, X3, &inlier);
-            cerr << "** triangulation found new pairs: " << cv::countNonZero(inlier) << endl;
-
-            vector<int> already_used_for_3d(matches.size(),false);
-            for (int k=0; k<matches.size(); k++)
-                for (int i=0; i<x3d.size(); i++)
-                    if (x3d[i].ids[done_img_id]==matches[k].queryIdx)
+                int viewId=v;
+                // make projection
+                cv::Mat_<double> proj = K * (R[viewId] * cv::Mat(x3d[i].X) + t[viewId]);
+                proj /= proj(2);
+                
+                vector<int> candidate;
+                for (int k=0; k<imgKeypts[viewId].size(); ++k)
+                    if (usedObs.find(make_pair(viewId, k)) != usedObs.end()) // still not used
                         {
-                        already_used_for_3d[k]=true;
-                        //   cerr << " ! already reconstructed" << endl;
-                        inlier[k]=0; // remove from the list
+                        cv::Mat_<double> evec (proj(0)-imgKeypts[viewId][k].pt.x,
+                                               proj(1)-imgKeypts[viewId][k].pt.y);
+                        double dist = cv::norm(evec);
+                        if (dist < 2.*f_ransac_threshold)
+                            candidate.push_back(k);
                         }
-            cerr << "** new pairs after removing those of X: " << cv::countNonZero(inlier) << endl;
-            
-            cv::Mat img_done = images[done_img_id].clone();
-            cv::Mat img_new  = images[image_selected].clone();
-            for (int i=0; i<inlier.size(); i++)
-                if (inlier[i])
+                if (!candidate.empty())
                     {
-                    cv::Scalar color = getRandomColor();
-                    cv::circle(img_done, p1[i], 7, color, 2);
-                    cv::circle(img_done, p1[i], 2, color);
-                    cv::circle(img_new, p2[i], 7, color, 2);
-                    cv::circle(img_new, p2[i], 2, color);
+                    // choose one of the least feature distance.
                     }
-            imshow("img_done", img_done);
-            imshow("img_new", img_new);
-            cv::waitKey();
-            }
-
-        images_processed.insert(image_selected);
-        //break;
-        } // while
+                }
+        }
+    
+    // find new matches from scratch
+    //
+    {
+    vector<int> perm;
+    for (int i=0; i<images.size(); i++) perm.push_back(i);
+    set< pair<int,pair<int,int> > > triples;
+    do
+        {
+//        for (int i=0; i<perm.size(); i++)
+//            cerr << perm[i] << ' ' ;
+//        cerr << endl;
+#define make_triple(a,b,c) (make_pair(a,make_pair(b,c)))
+        triples.insert(make_triple(perm[0], perm[1], perm[2]));
+        }
+    while (std::next_permutation(perm.begin(), perm.end()));
+    cerr << "Generated triples: " << triples.size() << endl;
+    
+    for (set< pair<int,pair<int,int> > >::iterator it=triples.begin(); it!=triples.end(); ++it)
+        {
+        vector<cv::Mat_<double> > T = getTrifocal (this->P,
+                                                   it->first, it->second.first,it->second.second);
+        
+        }
+    }
+    
+    // final ba
+    //
+    cerr << "-------------------------------------------" << endl;
+    cerr << "** Final BA " << endl;
+    cerr << "-------------------------------------------" << endl;
+    this->ba();
+    cerr << "-------------------------------------------" << endl;
+    cerr << "  ** After BA " << endl;
+    printReprojectionError();
+    cerr << "-------------------------------------------" << endl;
+    cerr << endl << "!!! SFM Finished !!!" << endl << endl;
 }

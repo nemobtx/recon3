@@ -1,11 +1,12 @@
 .SUFFIXES: .cpp
 
-CXX = clang++  
+CXX = clang++ 
 
 HFILES = ceres-ba.h XBuilder.h
 
 SRCS = main.cpp XBuilder.cpp sfm.cpp fmatrix_matching.cpp triangulation.cpp \
        two_view_reconst.cpp \
+       pnp.cpp \
        bundle-adjust.cpp ceres-ba.cpp
 
 OBJS = $(SRCS:.cpp=.o)

@@ -43,6 +43,7 @@
 		B03A38011AA48DDE00AE8F76 /* ceres-pose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03A37FF1AA48DDE00AE8F76 /* ceres-pose.cpp */; };
 		B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */; };
 		B04FDD701A9C8C5100C3547A /* triangulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */; };
+		B079155E1AAD3FE600191E56 /* pnp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B079155D1AAD3FE600191E56 /* pnp.cpp */; };
 		B087CA0C1A8F305A001851F7 /* file_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA0A1A8F305A001851F7 /* file_Interface.cpp */; };
 		B087CA141A8F3578001851F7 /* convert2pcd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA131A8F3578001851F7 /* convert2pcd.cpp */; };
 		B087CA261A903ED3001851F7 /* pcdViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B087CA251A903ED3001851F7 /* pcdViewer.cpp */; };
@@ -715,6 +716,7 @@
 		B03A38001AA48DDE00AE8F76 /* ceres-pose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ceres-pose.h"; sourceTree = "<group>"; };
 		B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmatrix_matching.cpp; sourceTree = "<group>"; };
 		B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulation.cpp; sourceTree = "<group>"; };
+		B079155D1AAD3FE600191E56 /* pnp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pnp.cpp; sourceTree = "<group>"; };
 		B087CA0A1A8F305A001851F7 /* file_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_Interface.cpp; sourceTree = "<group>"; };
 		B087CA0B1A8F305A001851F7 /* file_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_Interface.h; sourceTree = "<group>"; };
 		B087CA111A8F3578001851F7 /* convert2pcd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convert2pcd; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2612,6 +2614,7 @@
 				B0EC849A1A9B4E7A0074DA13 /* XBuilder.h */,
 				B0EC84991A9B4E7A0074DA13 /* XBuilder.cpp */,
 				B0EC849C1A9B529E0074DA13 /* sfm.cpp */,
+				B079155D1AAD3FE600191E56 /* pnp.cpp */,
 				B04FDD6F1A9C8C5100C3547A /* triangulation.cpp */,
 				B03A37B71A9DF9BE00AE8F76 /* two_view_reconst.cpp */,
 				B04FDD6D1A9C067200C3547A /* fmatrix_matching.cpp */,
@@ -2821,6 +2824,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B079155E1AAD3FE600191E56 /* pnp.cpp in Sources */,
 				B0EC849D1A9B529E0074DA13 /* sfm.cpp in Sources */,
 				B0EC849B1A9B4E7A0074DA13 /* XBuilder.cpp in Sources */,
 				B04FDD6E1A9C067200C3547A /* fmatrix_matching.cpp in Sources */,

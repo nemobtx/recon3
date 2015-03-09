@@ -76,7 +76,7 @@ struct Bundler
         num_shared_internals_ = 3; // focal length, x0, y0
         shared_internals_ = new double[num_shared_internals_];
         
-        cerr << "reading the observations" << endl;
+        cerr << "reading the observations: " << num_observations_ << endl;
         for (int i = 0; i < num_observations_; ++i) {
             *(camera_index_ + i) = obs[i].cam_id;
             *(point_index_ + i) = obs[i].str_id;
@@ -85,7 +85,7 @@ struct Bundler
             }
         }
         
-        cerr << "reading the motion + structure" << endl;
+        cerr << "reading the motion + structure: " << num_parameters_ << endl;
         for (int i = 0; i < num_parameters_; ++i) {
             *(parameters_ + i) = motion[i];
         }

@@ -18,6 +18,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <tuple>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/contrib/contrib.hpp>
@@ -53,9 +54,9 @@ void getAlignedKeyPointsFromMatch(const std::vector<cv::KeyPoint>& imgpts1,
 
 typedef std::map< std::pair<int,int>,  std::vector<cv::DMatch> > MatchMap;
 
-const double triangulation_err_th = 30.0;
+const double triangulation_err_th = 3.0;
 
-const double f_ransac_threshold = 2.50;
+const double f_ransac_threshold = 3.50;
 const double f_ransac_confidence = 0.999;
 
 
@@ -85,6 +86,8 @@ struct XBuilder {
     std::vector<cv::Mat> R; // rotation
     std::vector<cv::Mat> t; // translation
     
+    std::vector<cv::Mat_<double> > P; // = K[R t]
+    
 //    std::vector<cv::Point3d> pointcloud;
     std::vector<cv::Vec3b>   pointcloud_RGB;
     
@@ -100,6 +103,9 @@ struct XBuilder {
                      vector<uchar>*pinlier=0);
     
     void Two_View_Reconstruction(vector<pair<int, std::pair<int,int> > >& pairs);
+    
+    void doPnP();
+    
     void doBA(); //BA
     void printReprojectionError();
     

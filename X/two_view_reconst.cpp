@@ -15,28 +15,42 @@ inline bool sort_ascending(pair<int,pair<int,int> > a, pair<int,pair<int,int> > 
 { return a.first < b.first; }
 
 
-void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >& pairs)
+void XBuilder::Two_View_Reconstruction (vector<pair<int, std::pair<int,int> > >& pairs_in)
 {
-    std::sort(pairs.begin(), pairs.end(), sort_ascending);
+    std::sort(pairs_in.begin(), pairs_in.end(), sort_descending);
     cerr << "hfratios ---- " << endl;
-    for (int i=0; i<pairs.size(); i++)
+    for (int i=0; i<pairs_in.size(); i++)
     {
-        cerr << pairs[i].first << endl;
+        cerr << pairs_in[i].first << endl;
     }
     cerr << "-" << endl;
+    
+    vector<pair<int, std::pair<int,int> > > pairs;
+    for (int i=0; i<pairs_in.size(); i++)
+        if (pairs_in[i].first <= 90)
+            {
+            int nmatch = (int)matches_pairs[pairs_in[i].second].size();
+            pairs.push_back(make_pair(nmatch, pairs_in[i].second));
+            }
+    std::sort(pairs.begin(), pairs.end(), sort_descending);
     
     bool next_flag = true;
     int next_pair=0;
     do // find the most probable pair
-    {
+        {
+        
+        if (next_pair >= pairs.size())
+            {
+            cerr << "! No more pairs to consider. Stop." << endl;
+            exit (0);
+            }
+        
         int hfratio = pairs[next_pair].first;
         pair<int,int> min_pair = pairs[next_pair].second;
         ++next_pair;
         
-        if (hfratio > 80) continue; // the motion of thew view pair is similar to rotaiton.
-        
         cerr << endl;
-        cerr << "! min_pair=" << image_names[min_pair.first] << ", " << image_names[min_pair.second] << endl;
+        cerr << "! min_pair=" << image_names[min_pair.first] << ", " << image_names[min_pair.second] << " with matches=" << hfratio << endl;
         cerr << endl;
         
         //

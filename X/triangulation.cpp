@@ -284,7 +284,7 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     cerr << "XBuilder::triangulate()" << endl;
     
     X3.clear(); // returned, result of triangulation
-    if (pinlier) pinlier->resize(pt1.size());
+    if (pinlier && pinlier->empty()) pinlier->resize(pt1.size());
     
     vector< cv::Mat > Rs, ts;
     Rs.push_back(R0);
@@ -293,6 +293,8 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     ts.push_back(t1);
     for (int m=0; m<pt1.size(); m++)
         {
+        if (pinlier && ((*pinlier)[m]==0)) continue;
+        
         cv::Point2d p(pt1[m].x, pt1[m].y);
         cv::Point2d q(pt2[m].x, pt2[m].y);
         vector<Point2d> ps;
@@ -324,7 +326,7 @@ int XBuilder::triangulate (cv::Mat R0, cv::Mat t0,
     std::sort(errall.begin(), errall.end());
     
     double d80 = errall[errall.size()*8/10];
-    double outlier_threshold = min (max(2.4*d80, 4.0), 16.0);
+    double outlier_threshold = min (max(2.4*d80, 4.0), 16.0); // snavely07
     cerr << " -- outlier_threshold = " << outlier_threshold << " d80= " << d80 << endl;
     
     // check the polarity of the reconstruction: front or back of the camera

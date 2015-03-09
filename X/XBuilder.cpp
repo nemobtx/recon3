@@ -189,7 +189,7 @@ void XBuilder::fileSave(const std::string name)
         cv::Point3d p3 = this->x3d[i].X;
         fprintf (fp, "%10.7f  %10.7f  %10.7f  %4d  %4d  %4d\n",
                  p3.x, p3.y, p3.z,
-                 rgbv[0], rgbv[1], rgbv[2]);
+                 rgbv[2], rgbv[1], rgbv[0]);
         }
     fclose (fp);
     
